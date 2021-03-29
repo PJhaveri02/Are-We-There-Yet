@@ -1,0 +1,22 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./src/server.js",
+  "scripts": {
+    "start": "node -r esm ./src/server.js",
+    "server": "npm run start",
+    "production": "cross-env NODE_ENV=production PORT=3000 node -r esm ./src/server.js",
+    "init-db": "node -r esm ./src/articles-data/init-db.js"
+  },
+  "keywords": [],
+  "author": "",
+  "dependencies": {
+    "esm": "^3.2.25",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.2"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3"
+  }
+}

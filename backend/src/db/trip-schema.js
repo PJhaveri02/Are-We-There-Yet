@@ -3,9 +3,10 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 // The Schema of a sub trip
-const subTrip = new Schema({
+const stop = new Schema({
   startDate: Date,
-  endDate: Date,
+  locationName: String,
+  timeSpent: Number,
   lat: String,
   lng: String,
 });
@@ -14,7 +15,7 @@ const tripSchema = new Schema(
   {
     title: { type: String, required: true },
     description: String,
-    trips: [subTrip],
+    trips: [stop],
     userID: String,
   },
   {

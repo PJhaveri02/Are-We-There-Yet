@@ -4,18 +4,17 @@ const dummyTrips = [
     description: "First ever trip!",
     trips: [
       {
-        // Sky City
+        locationName: "Sky City",
         startDate: "2021-04-01",
-        endDate: "2021-04-05",
         lat: "-36.8488",
         lng: "174.7617",
+        timeSpent: 5,
       },
       {
-        // UOA
-        startDate: "2021-04-06",
-        endDate: "2021-04-06",
+        locationName: "UOA",
         lat: "-36.8523",
         lng: "174.7691",
+        timeSpent: 1,
       },
     ],
     userID: "ABC123",
@@ -24,18 +23,17 @@ const dummyTrips = [
     title: "USA",
     trips: [
       {
-        // LA
+        locationName: "LA",
         startDate: "2021-12-01",
-        endDate: "2021-12-12",
         lat: "34.0522",
         lng: "-118.2437",
+        timeSpent: 10,
       },
       {
-        // Las Vegas
-        startDate: "2021-12-13",
-        endDate: "2021-12-16",
+        locationName: "Las Vegas",
         lat: "36.1699",
         lng: "-115.1398",
+        timeSpent: 5,
       },
     ],
     userID: "USER2",

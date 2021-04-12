@@ -2,6 +2,7 @@ import express from "express";
 import path from "path";
 import mongoose from "mongoose";
 import routes from "./routes";
+import connectToDatabase from "./db/db-connect";
 
 // Setup Express
 const app = express();
@@ -19,10 +20,6 @@ app.use(express.static(path.join(__dirname, "../public")));
 // TODO: Serve up the frontend's "build" directory, if we're running in production mode.
 
 // Start the DB running. Then, once it's connected, start the server.
-mongoose
-  .connect("mongodb://localhost:27017/Are-We-There-Yet", {
-    useNewUrlParser: true,
-  })
-  .then(() =>
-    app.listen(port, () => console.log(`App server listening on port ${port}!`))
-  );
+connectToDatabase().then(() =>
+  app.listen(port, () => console.log(`App server listening on port ${port}!`))
+);

@@ -11,5 +11,6 @@ export default function connectToDatabase(
 ) {
   return mongoose.connect(connectionString, {
     useNewUrlParser: true,
+    useUnifiedTopology: true,
   });
 }

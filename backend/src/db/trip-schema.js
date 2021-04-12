@@ -6,8 +6,8 @@ const Schema = mongoose.Schema;
 const subTrip = new Schema({
   startDate: Date,
   endDate: Date,
-  xCoordinate: String,
-  yCoordinate: String,
+  lat: String,
+  lng: String,
 });
 
 const tripSchema = new Schema(

@@ -1,0 +1,34 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Frontend CI
+
+# Controls when the action will run. 
+on:
+  pull_request:
+    branches: [ main, Develop ]
+
+defaults:
+  run:
+    working-directory: frontend
+
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  frontend-ci:
+    name: Run Frontend Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14
+
+      - name: Install Node.js dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm test

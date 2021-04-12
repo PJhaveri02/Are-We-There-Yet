@@ -1,6 +1,11 @@
 import mongoose from "mongoose";
 import connectToDatabase from "./db-connect";
+import dummyTrips from "./dummy-trips";
 import { Trip } from "./trip-schema";
+
+const addData = async () => {
+  await Trip.insertMany(dummyTrips.map((t) => new Trip(t)));
+};
 
 const main = async () => {
   await connectToDatabase();
@@ -10,10 +15,8 @@ const main = async () => {
   // Delete Trips
   await Trip.deleteMany({});
 
-  const newTrip = new Trip({
-    title: "New Trip",
-  });
-  await newTrip.save();
+  // Add Trips to database
+  await addData();
 
   // Disconnect from database
   mongoose.disconnect();

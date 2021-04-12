@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
-// The Schema of a single trip
+// The Schema of a sub trip
 const subTrip = new Schema({
   startDate: Date,
   endDate: Date,

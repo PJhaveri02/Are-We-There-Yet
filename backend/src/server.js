@@ -18,4 +18,11 @@ app.use(express.static(path.join(__dirname, "../public")));
 
 // TODO: Serve up the frontend's "build" directory, if we're running in production mode.
 
-// TODO: Start the DB running. Then, once it's connected, start the server.
+// Start the DB running. Then, once it's connected, start the server.
+mongoose
+  .connect("mongodb://localhost:27017/Are-We-There-Yet", {
+    useNewUrlParser: true,
+  })
+  .then(() =>
+    app.listen(port, () => console.log(`App server listening on port ${port}!`))
+  );

@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
-const DEFAULT_CONNECTION_STRING = "mongodb://localhost:27017/Are-We-There-Yet";
+const DEFAULT_CONNECTION_STRING =
+  "mongodb+srv://mainUser:MainUser123@realmcluster.iihe4.mongodb.net/Are-We-There-Yet?retryWrites=true&w=majority";
 
 /**
  * This function begins the process of connecting to the database, and returns a promise that will

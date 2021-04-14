@@ -3,6 +3,7 @@ import * as Realm from "realm-web";
 import Login from "./components/sign-in/Login";
 import UserDetail from "./components/sign-in/UserDetail";
 
+// Realm app to authenticate user
 const REALM_APP_ID = "are-we-there-yet-zaqns";
 export const app = new Realm.App({ id: REALM_APP_ID });
 

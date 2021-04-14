@@ -1,6 +1,6 @@
 import { useState } from "react";
 import * as Realm from "realm-web";
-import Login from "./components/sign-in/Login";
+import LoginPage from "./components/sign-in/LoginPage";
 import UserDetail from "./components/sign-in/UserDetail";
 
 // Realm app to authenticate user
@@ -15,11 +15,7 @@ function App() {
       {user ? (
         <UserDetail user={user} setUser={setUser} />
       ) : (
-        <Login
-          setUser={setUser}
-          email="testuser@tesing.com"
-          password="testing123"
-        />
+        <LoginPage setUser={setUser} />
       )}
     </div>
   );

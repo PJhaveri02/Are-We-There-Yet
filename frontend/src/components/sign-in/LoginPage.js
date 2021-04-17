@@ -34,6 +34,7 @@ const LoginPage = ({ setUser }) => {
               onBlur={props.handleBlur}
               value={props.values.email}
               name="email"
+              placeholder="Email"
             />
             <input
               type="password"
@@ -41,6 +42,7 @@ const LoginPage = ({ setUser }) => {
               onBlur={props.handleBlur}
               value={props.values.password}
               name="password"
+              placeholder="Password"
             />
             <button type="submit">Login</button>
           </form>

@@ -1,3 +1,4 @@
+import { Button, TextField } from "@material-ui/core";
 import { Formik } from "formik";
 import React from "react";
 import * as Realm from "realm-web";
@@ -28,23 +29,30 @@ const LoginPage = ({ setUser }) => {
       >
         {(props) => (
           <form onSubmit={props.handleSubmit}>
-            <input
-              type="text"
+            <TextField
+              label="Email"
               onChange={props.handleChange}
               onBlur={props.handleBlur}
               value={props.values.email}
-              name="email"
-              placeholder="Email"
+              id="email"
+              variant="outlined"
             />
-            <input
+            <TextField
+              label="Password"
               type="password"
               onChange={props.handleChange}
               onBlur={props.handleBlur}
               value={props.values.password}
-              name="password"
-              placeholder="Password"
+              id="password"
+              variant="outlined"
             />
-            <button type="submit">Login</button>
+            <Button
+              type="submit"
+              style={{ backgroundColor: "#1a73e8", color: "#fff" }}
+              variant="contained"
+            >
+              Login
+            </Button>
           </form>
         )}
       </Formik>

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import * as Realm from "realm-web";
-import LoginPage from "./components/sign-in/LoginPage";
-import UserDetail from "./components/sign-in/UserDetail";
+import LoginPage from "./components/sign-in/LoginPage.jsx";
+import UserDetail from "./components/sign-in/UserDetail.jsx";
 
 // Realm app to authenticate user
 const REALM_APP_ID = "are-we-there-yet-zaqns";

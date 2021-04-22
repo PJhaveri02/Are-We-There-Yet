@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 
@@ -15,7 +15,7 @@ const tripSchema = new Schema(
   {
     title: { type: String, required: true },
     description: String,
-    trips: [stop],
+    stops: [stop],
     userID: String,
   },
   {
@@ -23,6 +23,6 @@ const tripSchema = new Schema(
   }
 );
 
-const Trip = mongoose.model("Trip", tripSchema);
+const Trip = mongoose.model('Trip', tripSchema);
 
 export { Trip };

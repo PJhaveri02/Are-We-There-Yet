@@ -4,6 +4,10 @@
 
 import { Trip } from './trip-schema';
 
+const HTTP_NOT_FOUND = 404;
+const HTTP_NO_CONTENT = 204;
+const HTTP_UNAUTHORISED = 401;
+
 // Retrieve all of users trips
 export const retrieveAllTrips = async (userID) => {
   return await Trip.find({ userID: userID });
@@ -26,4 +30,24 @@ export const deleteTrip = async (id, userID) => {
   return true;
 };
 
+// Create a new trip
+export const createTrip = async (trip) => {
+  const dbTrip = new Trip(trip);
+  await dbTrip.save();
+  return dbTrip;
+};
 
+// Function that allows users to modify their own trip
+export const modifyTrip = async (trip) => {
+  const currentTrip = await Trip.findById(trip._id);
+  if (currentTrip && currentTrip.useID !== trip.userID) {
+    return HTTP_UNAUTHORISED;
+  }
+
+  const result = await Trip.findByIdAndUpdate(trip._id, trip, {
+    new: true,
+    useFindAndModify: false,
+  });
+
+  return result ? HTTP_NO_CONTENT : HTTP_NOT_FOUND;
+};

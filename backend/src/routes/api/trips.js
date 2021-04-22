@@ -6,6 +6,7 @@ import {
   retrieveAllTrips,
   retrieveTrip,
 } from '../../db/trip-dao';
+import mongoose from 'mongoose';
 
 const HTTP_CREATED = 201;
 const HTTP_NOT_FOUND = 404;
@@ -37,7 +38,7 @@ router.get('/', async (req, res) => {
 // Retrieve single trip
 router.get('/:id', async (req, res) => {
   const { id } = req.params;
-  const trip = retrieveTrip(id);
+  const trip = await retrieveTrip(id);
   const userID = req.body.userID;
 
   if (!trip) {
@@ -53,7 +54,7 @@ router.get('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   const { id } = req.params;
   const userID = req.body.userID;
-  const success = deleteTrip(id, userID);
+  const success = await deleteTrip(id, userID);
   res.sendStatus(success ? HTTP_NO_CONTENT : HTTP_UNAUTHORISED);
 });
 

@@ -27,7 +27,10 @@ router.use('/:id', async (req, res, next) => {
 router.get('/', async (req, res) => {
   const userID = req.body.userID;
 
-  if (!userID) return HTTP_UNAUTHORISED;
+  if (!userID) {
+    res.sendStatus(HTTP_UNAUTHORISED);
+    return;
+  }
   res.json(await retrieveAllTrips(userID));
 });
 

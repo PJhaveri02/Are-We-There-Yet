@@ -8,7 +8,8 @@ const REALM_APP_ID = 'are-we-there-yet-zaqns';
 export const app = new Realm.App({ id: REALM_APP_ID });
 
 function App() {
-  const [user, setUser] = useState(app.currentUser);
+  // Uncomment below line once React Routing is done
+  // const [user, setUser] = useState(app.currentUser);
 
   return (
     <div className='App'>

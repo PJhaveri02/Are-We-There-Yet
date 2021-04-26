@@ -1,7 +1,6 @@
-import { useState } from 'react';
 import * as Realm from 'realm-web';
-import logo from './logo.svg';
 import './App.css';
+import logo from './logo.svg';
 
 // Realm app to authenticate user
 const REALM_APP_ID = 'are-we-there-yet-zaqns';

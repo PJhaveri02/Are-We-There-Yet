@@ -1,7 +1,7 @@
 const dummyTrips = [
   {
     title: "Trip 1",
-    description: "First ever trip",
+    description: "First ever trip!",
     trips: [
       {
         locationName: "Sky City",

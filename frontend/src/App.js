@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import * as Realm from 'realm-web';
-import LoginPage from './components/sign-in/LoginPage.jsx';
-import UserDetail from './components/sign-in/UserDetail.jsx';
-import SignUp from './components/sign-in/SignUp.jsx';
-import { Switch } from '@material-ui/core';
+import logo from './logo.svg';
+import './App.css';
 
 // Realm app to authenticate user
 const REALM_APP_ID = 'are-we-there-yet-zaqns';
@@ -11,23 +9,23 @@ export const app = new Realm.App({ id: REALM_APP_ID });
 
 function App() {
   const [user, setUser] = useState(app.currentUser);
-  const [checked, setChecked] = useState(false);
 
   return (
-    <div>
-      <Switch
-        checked={checked}
-        onChange={() => setChecked(!checked)}
-        name='checkA'
-        inputProps={{ 'aria-label': 'primary checkbox' }}
-      />
-      {user ? (
-        <UserDetail user={user} setUser={setUser} />
-      ) : checked ? (
-        <SignUp />
-      ) : (
-        <LoginPage setUser={setUser} />
-      )}
+    <div className='App'>
+      <header className='App-header'>
+        <img src={logo} className='App-logo' alt='logo' />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className='App-link'
+          href='https://reactjs.org'
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          Learn React
+        </a>
+      </header>
     </div>
   );
 }

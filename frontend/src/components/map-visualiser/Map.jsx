@@ -4,7 +4,6 @@ import circle from "../../assets/circle2.png";
 import {
   DEFAULT_TRAVEL_MODE,
   defaultCenter,
-  libraries,
   defaultZoom,
   mapContainerStyle,
   DEFAULT_MAP_SETTINGS,
@@ -12,14 +11,11 @@ import {
   POLYLINE_OPT,
 } from "./DefaultSettings";
 import {
-  useLoadScript,
   GoogleMap,
   Marker,
   DirectionsService,
   Polyline,
 } from "@react-google-maps/api";
-
-const REACT_APP_GOOGLE_MAPS_API_KEY = "AIzaSyBd9VunbiAT2b0r3FjRj-djyOVPf_zhp6Q";
 
 export default function Map(props) {
   const { origin, destination, travelMode, stops } = props;
@@ -29,11 +25,6 @@ export default function Map(props) {
   const [path, setPath] = useState();
   const [, setPathInfo] = useState();
   const [circleMarker, setCircleMarker] = useState();
-
-  const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: REACT_APP_GOOGLE_MAPS_API_KEY,
-    libraries,
-  });
 
   // Retain map throughout the lifecycle of component
   const mapRef = useRef();
@@ -86,9 +77,6 @@ export default function Map(props) {
       setNotDSRendered(false);
     }
   }, [directions]);
-
-  if (loadError) return "Error loading maps";
-  if (!isLoaded) return "Not Loaded";
 
   // A callback function to be called when the DirectionsService has obtained a response
   const directionsCallback = (response, status) => {

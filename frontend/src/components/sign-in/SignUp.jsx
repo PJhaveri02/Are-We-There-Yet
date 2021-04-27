@@ -31,7 +31,6 @@ const SignUp = () => {
       <Formik
         initialValues={{ email: '', password: '' }}
         onSubmit={(values, actions) => {
-          //   app.emailPasswordAuth.registerUser(values.email, values.password);
           userRegistration(values.email, values.password, setEmailError, setPasswordError);
           actions.setSubmitting(false);
         }}

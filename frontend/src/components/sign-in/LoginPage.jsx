@@ -1,8 +1,8 @@
 import { Button, TextField } from '@material-ui/core';
 import { Formik } from 'formik';
-import React from 'react';
+import React, { useContext } from 'react';
 import * as Realm from 'realm-web';
-import { app } from '../../App';
+import { app, AuthContext } from '../../App';
 
 // Helper function to login user
 const login = async (setUser, email, password) => {
@@ -14,7 +14,9 @@ const login = async (setUser, email, password) => {
   }
 };
 
-const LoginPage = ({ setUser }) => {
+const LoginPage = () => {
+  const [, setUser] = useContext(AuthContext);
+
   return (
     <div>
       <h1>Login Page</h1>

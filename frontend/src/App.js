@@ -1,8 +1,7 @@
-import { useState, createContext } from 'react';
+import { createContext, useState } from 'react';
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import * as Realm from 'realm-web';
-import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import MapVisualiser from './components/map-visualiser/MapVisualiser';
-
 import LoginPage from './components/sign-in/LoginPage';
 import SignUp from './components/sign-in/SignUp';
 
@@ -12,7 +11,6 @@ export const app = new Realm.App({ id: REALM_APP_ID });
 export const AuthContext = createContext(undefined);
 
 function App() {
-  // Uncomment below line once React Routing is done
   const [user, setUser] = useState(app.currentUser);
 
   return (

@@ -1,26 +1,42 @@
 import React from "react";
-import usePlacesAutocomplete, { getDetails, getGeocode, getLatLng } from "use-places-autocomplete";
-// import { Combobox, ComboboxInput, ComboboxPopover, ComboboxList, ComboboxOption } from "@reach/combobox";
-import "@reach/combobox/styles.css";
+import usePlacesAutocomplete, {
+  getGeocode,
+  getLatLng,
+} from "use-places-autocomplete";
 
-function Searchbar (props) {
-    const {onDestinationSelect} = props;
-    
-    const {ready, value, suggestions: {status, data}, setValue, clearSuggestions} = usePlacesAutocomplete({
-        requestOptions: {
-            location: { lat: () => -40.900558, lng: () => 174.885971 },
-            radius: 1000*1000,
-        }
-    });
+function Searchbar(props) {
+  const { onDestinationSelect } = props;
 
-    const handleSelect = (suggestion) => () => {
-      const { description } = suggestion;
-      onDestinationSelect(description);
-      setValue("");
-      clearSuggestions();
-    }
+  const {
+    ready,
+    value,
+    suggestions: { status, data },
+    setValue,
+    clearSuggestions,
+  } = usePlacesAutocomplete({
+    requestOptions: {
+      location: { lat: () => -40.900558, lng: () => 174.885971 },
+      radius: 1000 * 1000,
+    },
+  });
 
-    const renderSuggestions = () =>
+  const handleSelect = (suggestion) => () => {
+    const {
+      structured_formatting: { main_text },
+      description,
+    } = suggestion;
+
+    getGeocode({ address: description }).then((results) =>
+      getLatLng(results[0]).then(({ lat, lng }) => {
+        onDestinationSelect(main_text, lat, lng);
+      })
+    );
+
+    setValue("");
+    clearSuggestions();
+  };
+
+  const renderSuggestions = () =>
     data.map((suggestion) => {
       const {
         place_id,
@@ -34,28 +50,17 @@ function Searchbar (props) {
       );
     });
 
-    return (
-        <div>
-          <input
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
-            disabled={!ready}
-            placeholder="Enter Destination"
-          />
-          {status === "OK" && <ul>{renderSuggestions()}</ul>}
-        </div>
-      );
-
-    // return (
-    //     <div>
-    //         <Combobox onSelect={() => handleSelect()}>
-    //             <ComboboxInput value={value} onChange={(e) => {setValue(e.target.value)}} disabled={!ready} placeholder="Enter Destination" />
-    //             <ComboboxPopover>
-    //                 {status === "OK" && data.map((id, description) => (<ComboboxOption key={id} value={description} />))}
-    //             </ComboboxPopover>
-    //         </Combobox>
-    //     </div>
-    // );
+  return (
+    <div>
+      <input
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        disabled={!ready}
+        placeholder="Enter Destination"
+      />
+      {status === "OK" && <ul>{renderSuggestions()}</ul>}
+    </div>
+  );
 }
 
 export default Searchbar;

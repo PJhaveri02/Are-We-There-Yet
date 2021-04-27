@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import mongoose from 'mongoose';
-=======
-import mongoose from "mongoose";
->>>>>>> dc90a20338b37393218fcaedece1678f17df5082
 
 const Schema = mongoose.Schema;
 
@@ -19,11 +15,7 @@ const tripSchema = new Schema(
   {
     title: { type: String, required: true },
     description: String,
-<<<<<<< HEAD
     stops: [stop],
-=======
-    trips: [stop],
->>>>>>> dc90a20338b37393218fcaedece1678f17df5082
     userID: String,
   },
   {
@@ -31,10 +23,6 @@ const tripSchema = new Schema(
   }
 );
 
-<<<<<<< HEAD
 const Trip = mongoose.model('Trip', tripSchema);
-=======
-const Trip = mongoose.model("Trip", tripSchema);
->>>>>>> dc90a20338b37393218fcaedece1678f17df5082
 
 export { Trip };

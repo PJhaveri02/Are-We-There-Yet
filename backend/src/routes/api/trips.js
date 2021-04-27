@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import express from 'express';
 import {
   createTrip,
@@ -8,14 +7,10 @@ import {
   retrieveTrip,
 } from '../../db/trip-dao';
 import mongoose from 'mongoose';
-=======
-import express from "express";
->>>>>>> dc90a20338b37393218fcaedece1678f17df5082
 
 const HTTP_CREATED = 201;
 const HTTP_NOT_FOUND = 404;
 const HTTP_NO_CONTENT = 204;
-<<<<<<< HEAD
 const HTTP_UNAUTHORISED = 401;
 const HTTP_BAD_REQUEST = 400;
 
@@ -95,11 +90,5 @@ router.put('/:id', async (req, res) => {
   const status = await modifyTrip(trip);
   res.sendStatus(status);
 });
-=======
-
-const router = express.Router();
-
-// TODO: Need to add API endpoints
->>>>>>> dc90a20338b37393218fcaedece1678f17df5082
 
 export default router;

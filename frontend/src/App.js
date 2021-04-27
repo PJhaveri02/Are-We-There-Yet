@@ -1,14 +1,15 @@
-import { useState } from "react";
+import { useState, createContext } from 'react';
 import * as Realm from 'realm-web';
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
-import MapVisualiser from "./components/map-visualiser/MapVisualiser";
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import MapVisualiser from './components/map-visualiser/MapVisualiser';
 
-import LoginPage from "./components/sign-in/LoginPage";
-import SignUp from "./components/sign-in/SignUp";
+import LoginPage from './components/sign-in/LoginPage';
+import SignUp from './components/sign-in/SignUp';
 
 // Realm app to authenticate user
 const REALM_APP_ID = 'are-we-there-yet-zaqns';
 export const app = new Realm.App({ id: REALM_APP_ID });
+export const AuthContext = createContext(undefined);
 
 function App() {
   // Uncomment below line once React Routing is done
@@ -16,27 +17,27 @@ function App() {
 
   return (
     <div className='App'>
-      <Router>
-        <Switch>
-          <Route exact path="/">
-            <LoginPage />
-          </Route>
+      <AuthContext.Provider value={[user, setUser]}>
+        <Router>
+          <Switch>
+            <Route exact path='/'>
+              <LoginPage />
+            </Route>
 
-          <Route exact path="/sign-up">
-            <SignUp />
-          </Route>
+            <Route exact path='/sign-up'>
+              <SignUp />
+            </Route>
 
-          <Route exact path="/home">
-            {user ? <MapVisualiser /> : <Redirect to="/" /> }
-          </Route>
+            <Route exact path='/home'>
+              {user ? <MapVisualiser /> : <Redirect to='/' />}
+            </Route>
 
-          <Route path="*">
-            <p>
-              page not found
-            </p>
-          </Route>
-        </Switch>
-      </Router>
+            <Route path='*'>
+              <p>page not found</p>
+            </Route>
+          </Switch>
+        </Router>
+      </AuthContext.Provider>
     </div>
   );
 }

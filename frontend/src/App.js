@@ -1,6 +1,7 @@
 import { useState } from "react";
 import * as Realm from 'realm-web';
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import MapVisualiser from "./components/map-visualiser/MapVisualiser";
 
 import LoginPage from "./components/sign-in/LoginPage";
 import SignUp from "./components/sign-in/SignUp";
@@ -26,7 +27,7 @@ function App() {
           </Route>
 
           <Route exact path="/home">
-            {user ? <p>home page</p> : <Redirect to="/" /> }
+            {user ? <MapVisualiser /> : <Redirect to="/" /> }
           </Route>
 
           <Route path="*">

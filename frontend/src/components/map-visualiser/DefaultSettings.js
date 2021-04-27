@@ -6,7 +6,6 @@ const defaultCenter = {
   lng: 174.76,
 };
 
-const libraries = ["places", "directions"];
 const defaultZoom = 14;
 
 const mapContainerStyle = {
@@ -29,8 +28,8 @@ const DEFAULT_MAP_SETTINGS = {
 // returns a random property from an object
 var getRandomProperty = (obj) => {
   var keys = Object.keys(obj);
-  return obj[keys[keys.length * Math.random () << 0]];
-}
+  return obj[keys[(keys.length * Math.random()) << 0]];
+};
 
 const STROKE_COLORS = {
   blue: "#0000FF",
@@ -38,7 +37,6 @@ const STROKE_COLORS = {
   green: "#00FF00",
   yellow: "#FFFF00",
   red: "#FF0000",
-
 };
 
 const DEFAULT_POLYLINE_OPT = {
@@ -52,12 +50,11 @@ const POLYLINE_OPT = {
   geodesic: true,
   strokeOpacity: 2.0,
   strokeWeight: 4,
-}
+};
 
 export {
   DEFAULT_TRAVEL_MODE,
   defaultCenter,
-  libraries,
   defaultZoom,
   mapContainerStyle,
   DEFAULT_MAP_SETTINGS,

@@ -1,24 +1,32 @@
-import "./App.css";
-import Form from "./components/form";
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
-import MapVisualizer from "./components/GoogleMaps/MapVisualizer";
+import * as Realm from 'realm-web';
+import './App.css';
+import logo from './logo.svg';
+
+// Realm app to authenticate user
+const REALM_APP_ID = 'are-we-there-yet-zaqns';
+export const app = new Realm.App({ id: REALM_APP_ID });
 
 function App() {
-  return (
-    <Router>
-      <Switch>
-        <Route path="/trip">
-          <Form />
-        </Route>
+  // Uncomment below line once React Routing is done
+  // const [user, setUser] = useState(app.currentUser);
 
-        <Route path="/map">
-          <MapVisualizer />
-        </Route>
-        <Route path="*">
-          <Redirect to="/map" />
-        </Route>
-      </Switch>
-    </Router>
+  return (
+    <div className='App'>
+      <header className='App-header'>
+        <img src={logo} className='App-logo' alt='logo' />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className='App-link'
+          href='https://reactjs.org'
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
   );
 }
 

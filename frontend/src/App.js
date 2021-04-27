@@ -1,19 +1,27 @@
-import logo from './logo.svg';
+import * as Realm from 'realm-web';
 import './App.css';
+import logo from './logo.svg';
+
+// Realm app to authenticate user
+const REALM_APP_ID = 'are-we-there-yet-zaqns';
+export const app = new Realm.App({ id: REALM_APP_ID });
 
 function App() {
+  // Uncomment below line once React Routing is done
+  // const [user, setUser] = useState(app.currentUser);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+    <div className='App'>
+      <header className='App-header'>
+        <img src={logo} className='App-logo' alt='logo' />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
         <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+          className='App-link'
+          href='https://reactjs.org'
+          target='_blank'
+          rel='noopener noreferrer'
         >
           Learn React
         </a>

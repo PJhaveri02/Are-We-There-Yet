@@ -1,6 +1,6 @@
 import { useState } from "react";
 import * as Realm from 'realm-web';
-import { HashRouter, Switch, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 
 import LoginPage from "./components/sign-in/LoginPage";
 import SignUp from "./components/sign-in/SignUp";
@@ -15,7 +15,7 @@ function App() {
 
   return (
     <div className='App'>
-      <HashRouter>
+      <Router>
         <Switch>
           <Route exact path="/">
             <LoginPage />
@@ -35,7 +35,7 @@ function App() {
             </p>
           </Route>
         </Switch>
-      </HashRouter>
+      </Router>
     </div>
   );
 }

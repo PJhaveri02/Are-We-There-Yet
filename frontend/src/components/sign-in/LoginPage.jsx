@@ -22,6 +22,8 @@ const login = async (setUser, email, password, history) => {
     const user = await app.logIn(Realm.Credentials.emailPassword(email, password));
     if (user) {
       history.push('/home');
+    } else {
+      alert('Invalid username/password');
     }
     setUser(user);
   } catch (err) {

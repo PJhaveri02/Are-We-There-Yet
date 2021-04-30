@@ -1,25 +1,21 @@
-import React, { useState } from 'react';
+import { Button, TextField } from '@material-ui/core';
 import { Formik } from 'formik';
-import { TextField, Button } from '@material-ui/core';
-import { app } from '../../App';
+import React from 'react';
 import { useHistory } from 'react-router';
+import { app } from '../../App';
 
 // Helper function to determine if email and password are correct
-const userRegistration = async (email, password, setEmailError, setPasswordError, history) => {
+const userRegistration = async (email, password, history) => {
   if (email.length < 6 || email.length > 128 || password.length < 6 || password.length > 128) {
-    setEmailError(true);
-    setPasswordError(true);
+    alert('Invalid username/password');
     return;
   }
 
   try {
     await app.emailPasswordAuth.registerUser(email, password);
     history.push('/');
-    setEmailError(false);
-    setPasswordError(false);
   } catch {
-    setEmailError(true);
-    setPasswordError(true);
+    alert('Invalid username/password');
   }
 };
 
@@ -28,8 +24,6 @@ const handleRedirectToLoginPage = (history) => {
 };
 
 const SignUp = () => {
-  const [emailError, setEmailError] = useState(false);
-  const [passwordError, setPasswordError] = useState(false);
   const history = useHistory();
 
   return (
@@ -38,7 +32,7 @@ const SignUp = () => {
       <Formik
         initialValues={{ email: '', password: '' }}
         onSubmit={(values, actions) => {
-          userRegistration(values.email, values.password, setEmailError, setPasswordError, history);
+          userRegistration(values.email, values.password, history);
           actions.setSubmitting(false);
         }}
       >
@@ -51,7 +45,6 @@ const SignUp = () => {
               value={props.values.email}
               id='email'
               variant='outlined'
-              error={emailError}
             />
             <TextField
               label='Password'
@@ -61,7 +54,6 @@ const SignUp = () => {
               value={props.values.password}
               id='password'
               variant='outlined'
-              error={passwordError}
             />
             <Button
               type='submit'

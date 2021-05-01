@@ -91,7 +91,7 @@ const LoginPage = () => {
                 autoFocus
               />
               <FormControlLabel
-                control={<Checkbox value='remember' color='primary' />}
+                control={<Checkbox value='remember' style={{ color: '#1a73e8' }} />}
                 label='Remember me'
               />
               <Button

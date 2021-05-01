@@ -1,4 +1,13 @@
-import { Button, TextField } from '@material-ui/core';
+import {
+  Button,
+  Container,
+  CssBaseline,
+  Grid,
+  Link,
+  makeStyles,
+  TextField,
+  Typography,
+} from '@material-ui/core';
 import { Formik } from 'formik';
 import React from 'react';
 import { useHistory } from 'react-router';
@@ -19,56 +28,89 @@ const userRegistration = async (email, password, history) => {
   }
 };
 
-const handleRedirectToLoginPage = (history) => {
-  history.push('/');
-};
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  form: {
+    width: '100%',
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}));
 
 const SignUp = () => {
   const history = useHistory();
+  const classes = useStyles();
 
   return (
-    <div>
-      <h1>Sign Up</h1>
-      <Formik
-        initialValues={{ email: '', password: '' }}
-        onSubmit={(values, actions) => {
-          userRegistration(values.email, values.password, history);
-          actions.setSubmitting(false);
-        }}
-      >
-        {(props) => (
-          <form onSubmit={props.handleSubmit}>
-            <TextField
-              label='Email'
-              onChange={props.handleChange}
-              onBlur={props.handleBlur}
-              value={props.values.email}
-              id='email'
-              variant='outlined'
-            />
-            <TextField
-              label='Password'
-              type='password'
-              onChange={props.handleChange}
-              onBlur={props.handleBlur}
-              value={props.values.password}
-              id='password'
-              variant='outlined'
-            />
-            <Button
-              type='submit'
-              style={{ backgroundColor: '#1a73e8', color: '#fff' }}
-              variant='contained'
-            >
-              Sign Up
-            </Button>
-            <Button variant='contained' onClick={() => handleRedirectToLoginPage(history)}>
-              Login
-            </Button>
-          </form>
-        )}
-      </Formik>
-    </div>
+    <Container component='main' maxWidth='xs'>
+      <CssBaseline />
+      <div className={classes.paper}>
+        <Typography component='h1' variant='h5'>
+          Sign Up
+        </Typography>
+        <Formik
+          initialValues={{ email: '', password: '' }}
+          onSubmit={(values, actions) => {
+            userRegistration(values.email, values.password, history);
+            actions.setSubmitting(false);
+          }}
+        >
+          {(props) => (
+            <form onSubmit={props.handleSubmit} className={classes.form}>
+              <TextField
+                label='Email'
+                onChange={props.handleChange}
+                onBlur={props.handleBlur}
+                value={props.values.email}
+                id='email'
+                variant='outlined'
+                margin='normal'
+                fullWidth
+                autoFocus
+              />
+              <TextField
+                label='Password'
+                type='password'
+                onChange={props.handleChange}
+                onBlur={props.handleBlur}
+                value={props.values.password}
+                id='password'
+                variant='outlined'
+                margin='normal'
+                fullWidth
+                autoFocus
+              />
+              <Button
+                type='submit'
+                style={{ backgroundColor: '#1a73e8', color: '#fff' }}
+                variant='contained'
+                fullWidth
+                className={classes.submit}
+              >
+                Sign Up
+              </Button>
+              <Grid container>
+                <Grid item>
+                  <Link
+                    variant='body2'
+                    onClick={() => history.push('/')}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    {'Already have an account? Sign In'}
+                  </Link>
+                </Grid>
+              </Grid>
+            </form>
+          )}
+        </Formik>
+      </div>
+    </Container>
   );
 };
 

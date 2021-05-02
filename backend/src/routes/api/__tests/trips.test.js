@@ -356,3 +356,47 @@ it("401 when deleting someone else's trip", async () => {
     expect(await Trip.countDocuments()).toBe(3);
   }
 });
+
+it('updates a trip successfully', async () => {
+  const toUpdate = {
+    _id: new mongoose.mongo.ObjectId('000000000000000000000001'),
+    title: 'Trip 1 - Updated',
+    description: 'First ever trip - Updated',
+    stops: [
+      {
+        locationName: 'Sky City',
+        startDate: '2021-04-01',
+        lat: '-36.8488',
+        lng: '174.7617',
+        timeSpent: 3,
+      },
+      {
+        locationName: 'UOA',
+        lat: '-36.8523',
+        lng: '174.7691',
+        timeSpent: 2,
+      },
+    ],
+  };
+
+  const response = await axios({
+    method: 'PUT',
+    url: 'http://localhost:3001/api/trips/000000000000000000000001',
+    data: {
+      userID: 'ABC123',
+      trip: toUpdate,
+    },
+  });
+
+  // Check response
+  expect(response.status).toBe(204);
+
+  // Ensure DB was updated
+  const dbTrip = await Trip.findById('000000000000000000000001');
+  expect(dbTrip._id.toString()).toEqual(toUpdate._id.toString());
+  expect(dbTrip.title).toEqual(toUpdate.title);
+  expect(dbTrip.description).toEqual(toUpdate.description);
+  expect(dbTrip.stops.locationName).toEqual(toUpdate.stops.locationName);
+  expect(dbTrip.stops.lat).toEqual(toUpdate.stops.lat);
+  expect(dbTrip.stops.lng).toEqual(toUpdate.stops.lng);
+});

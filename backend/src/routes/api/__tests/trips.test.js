@@ -10,44 +10,48 @@ let mongod, app, server;
 
 const dummyData = [
   {
-    _id: new mongoose.mongo.ObjectId('000000000000000000000001'),
-    title: 'Trip 1',
-    description: 'First ever trip',
-    stops: [
-      {
-        locationName: 'Sky City',
-        startDate: '2021-04-01',
-        lat: '-36.8488',
-        lng: '174.7617',
-        timeSpent: 5,
-      },
-      {
-        locationName: 'UOA',
-        lat: '-36.8523',
-        lng: '174.7691',
-        timeSpent: 1,
-      },
-    ],
+    trip: {
+      _id: new mongoose.mongo.ObjectId('000000000000000000000001'),
+      title: 'Trip 1',
+      description: 'First ever trip',
+      stops: [
+        {
+          locationName: 'Sky City',
+          startDate: '2021-04-01',
+          lat: '-36.8488',
+          lng: '174.7617',
+          timeSpent: 5,
+        },
+        {
+          locationName: 'UOA',
+          lat: '-36.8523',
+          lng: '174.7691',
+          timeSpent: 1,
+        },
+      ],
+    },
     userID: 'ABC123',
   },
   {
-    _id: new mongoose.mongo.ObjectId('000000000000000000000002'),
-    title: 'USA',
-    stops: [
-      {
-        locationName: 'LA',
-        startDate: '2021-12-01',
-        lat: '34.0522',
-        lng: '-118.2437',
-        timeSpent: 10,
-      },
-      {
-        locationName: 'Las Vegas',
-        lat: '36.1699',
-        lng: '-115.1398',
-        timeSpent: 5,
-      },
-    ],
+    trip: {
+      _id: new mongoose.mongo.ObjectId('000000000000000000000002'),
+      title: 'USA',
+      stops: [
+        {
+          locationName: 'LA',
+          startDate: '2021-12-01',
+          lat: '34.0522',
+          lng: '-118.2437',
+          timeSpent: 10,
+        },
+        {
+          locationName: 'Las Vegas',
+          lat: '36.1699',
+          lng: '-115.1398',
+          timeSpent: 5,
+        },
+      ],
+    },
     userID: 'USER2',
   },
 ];
@@ -61,7 +65,7 @@ beforeAll(async (done) => {
   app = express();
   app.use(express.json());
   app.use('/api/trips', routes);
-  server = app.listen(3000, done);
+  server = app.listen(3001, done);
 });
 
 // Stop server and db once all tests complete
@@ -75,7 +79,26 @@ afterAll((done) => {
 
 // Populate db with dummy data before each test
 beforeEach(async () => {
-    for (let i = 0; i < dummyData.length; i++) {
-        await axios.post()
-    }
-})
+  for (let i = 0; i < dummyData.length; i++) {
+    await axios.post('http://localhost:3001/api/trips', dummyData[i]);
+  }
+});
+
+// Clear database after each test
+afterEach(async () => {
+  await Trip.deleteMany({});
+});
+
+it('retrieve all trips successfully', async () => {
+  const response = await axios({
+    method: 'GET',
+    url: 'http://localhost:3001/api/trips',
+    data: {
+      userID: 'ABC123',
+    },
+  });
+
+  expect(response.status).toBe(200);
+  const responseTrips = response.data;
+  expect(responseTrips.length).toBe(1);
+});

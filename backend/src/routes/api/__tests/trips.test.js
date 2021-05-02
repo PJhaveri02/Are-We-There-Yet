@@ -157,3 +157,20 @@ it('retrieve a single trip successfully', async () => {
   expect(responseTrip.stops.lat).toEqual(expectedTrip.stops.lat);
   expect(responseTrip.stops.lng).toEqual(expectedTrip.stops.lng);
 });
+
+it('returns a 404 when attempting to retrieve a nonexistant trip (valid id)', async () => {
+  try {
+    const response = await axios({
+      method: 'GET',
+      url: 'http://localhost:3001/api/trips/000000000000000000000000',
+      data: {
+        userID: 'ABC123',
+      },
+    });
+    fail('Should have thrown an exception.');
+  } catch (err) {
+    const { response } = err;
+    expect(response).toBeDefined();
+    expect(response.status).toBe(404);
+  }
+});

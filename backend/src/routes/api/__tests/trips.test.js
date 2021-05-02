@@ -1,9 +1,12 @@
 import axios from 'axios';
-import mongoose from 'mongoose';
+import mongoose, { mongo } from 'mongoose';
 import { Trip } from '../../../db/trip-schema';
 import connectToDatabase from '../../../db/db-connect';
 import express from 'express';
 import routes from '../trips';
+import { MongoMemoryServer } from 'mongodb-memory-server';
+
+let mongod, app, server;
 
 const dummyData = [
   {
@@ -48,3 +51,31 @@ const dummyData = [
     userID: 'USER2',
   },
 ];
+
+// Begin server and db before running tests
+beforeAll(async (done) => {
+  mongod = new MongoMemoryServer();
+
+  await mongod.getUri().then((cs) => connectToDatabase(cs));
+
+  app = express();
+  app.use(express.json());
+  app.use('/api/trips', routes);
+  server = app.listen(3000, done);
+});
+
+// Stop server and db once all tests complete
+afterAll((done) => {
+  server.close(async () => {
+    await mongoose.disconnect();
+    await mongod.stop();
+    done();
+  });
+});
+
+// Populate db with dummy data before each test
+beforeEach(async () => {
+    for (let i = 0; i < dummyData.length; i++) {
+        await axios.post()
+    }
+})

@@ -137,3 +137,23 @@ it('retrieve all trips successfully', async () => {
     expect(responseTrip.stops.lng).toEqual(expectedTrip.stops.lng);
   }
 });
+
+it('retrieve a single trip successfully', async () => {
+  const response = await axios({
+    method: 'GET',
+    url: 'http://localhost:3001/api/trips/000000000000000000000001',
+    data: {
+      userID: 'ABC123',
+    },
+  });
+  expect(response.status).toBe(200);
+
+  const responseTrip = response.data;
+  const expectedTrip = dummyData[0].trip;
+  expect(responseTrip._id.toString()).toEqual(expectedTrip._id.toString());
+  expect(responseTrip.title).toEqual(expectedTrip.title);
+  expect(responseTrip.description).toEqual(expectedTrip.description);
+  expect(responseTrip.stops.locationName).toEqual(expectedTrip.stops.locationName);
+  expect(responseTrip.stops.lat).toEqual(expectedTrip.stops.lat);
+  expect(responseTrip.stops.lng).toEqual(expectedTrip.stops.lng);
+});

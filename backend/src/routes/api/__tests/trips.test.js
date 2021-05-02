@@ -1,10 +1,10 @@
 import axios from 'axios';
-import mongoose, { mongo } from 'mongoose';
-import { Trip } from '../../../db/trip-schema';
-import connectToDatabase from '../../../db/db-connect';
 import express from 'express';
-import routes from '../trips';
 import { MongoMemoryServer } from 'mongodb-memory-server';
+import mongoose from 'mongoose';
+import connectToDatabase from '../../../db/db-connect';
+import { Trip } from '../../../db/trip-schema';
+import routes from '../trips';
 
 let mongod, app, server;
 

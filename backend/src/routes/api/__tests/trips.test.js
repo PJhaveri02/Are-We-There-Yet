@@ -160,7 +160,7 @@ it('retrieve a single trip successfully', async () => {
 
 it('returns a 404 when attempting to retrieve a nonexistant trip (valid id)', async () => {
   try {
-    const response = await axios({
+    await axios({
       method: 'GET',
       url: 'http://localhost:3001/api/trips/000000000000000000000000',
       data: {
@@ -177,7 +177,7 @@ it('returns a 404 when attempting to retrieve a nonexistant trip (valid id)', as
 
 it('returns a 400 when attempting to retrieve a nonexistant trip (invalid id)', async () => {
   try {
-    const response = await axios({
+    await axios({
       method: 'GET',
       url: 'http://localhost:3001/api/trips/randomID',
       data: {
@@ -195,7 +195,7 @@ it('returns a 400 when attempting to retrieve a nonexistant trip (invalid id)', 
 
 it('401 should be thrown when no id given', async () => {
   try {
-    const response = await axios({
+    await axios({
       method: 'GET',
       url: 'http://localhost:3001/api/trips/000000000000000000000001',
       data: {
@@ -212,7 +212,7 @@ it('401 should be thrown when no id given', async () => {
 
 it("401 should be thrown when access other's trip ", async () => {
   try {
-    const response = await axios({
+    await axios({
       method: 'GET',
       url: 'http://localhost:3001/api/trips/000000000000000000000001',
       data: {
@@ -296,7 +296,7 @@ it('401 when adding trip and not authorised', async () => {
   };
 
   try {
-    const response = await axios({
+    await axios({
       method: 'POST',
       url: 'http://localhost:3001/api/trips',
       data: {

@@ -34,6 +34,29 @@ const dummyData = [
   },
   {
     trip: {
+      _id: new mongoose.mongo.ObjectId('000000000000000000000003'),
+      title: 'Trip 2',
+      description: 'Second trip',
+      stops: [
+        {
+          locationName: 'Sky City',
+          startDate: '2021-04-01',
+          lat: '-36.8488',
+          lng: '174.7617',
+          timeSpent: 5,
+        },
+        {
+          locationName: 'UOA',
+          lat: '-36.8523',
+          lng: '174.7691',
+          timeSpent: 3,
+        },
+      ],
+    },
+    userID: 'ABC123',
+  },
+  {
+    trip: {
       _id: new mongoose.mongo.ObjectId('000000000000000000000002'),
       title: 'USA',
       stops: [
@@ -100,5 +123,17 @@ it('retrieve all trips successfully', async () => {
 
   expect(response.status).toBe(200);
   const responseTrips = response.data;
-  expect(responseTrips.length).toBe(1);
+  expect(responseTrips.length).toBe(2);
+
+  for (let i = 0; i < responseTrips.length; i++) {
+    const responseTrip = responseTrips[i];
+    const expectedTrip = dummyData[i].trip;
+
+    expect(responseTrip._id.toString()).toEqual(expectedTrip._id.toString());
+    expect(responseTrip.title).toEqual(expectedTrip.title);
+    expect(responseTrip.description).toEqual(expectedTrip.description);
+    expect(responseTrip.stops.locationName).toEqual(expectedTrip.stops.locationName);
+    expect(responseTrip.stops.lat).toEqual(expectedTrip.stops.lat);
+    expect(responseTrip.stops.lng).toEqual(expectedTrip.stops.lng);
+  }
 });

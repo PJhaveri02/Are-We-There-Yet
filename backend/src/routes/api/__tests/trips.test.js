@@ -272,5 +272,42 @@ it('Create a new trip', async () => {
   expect(dbTrip.description).toEqual(trip.description);
   expect(dbTrip.stops.locationName).toEqual(trip.stops.locationName);
   expect(dbTrip.stops.lat).toEqual(trip.stops.lat);
-  expect(dbTrip.stops.lng).toEqual(trip.stops.lng)
+  expect(dbTrip.stops.lng).toEqual(trip.stops.lng);
+});
+
+it('401 when adding trip and not authorised', async () => {
+  const trip = {
+    title: 'USA',
+    stops: [
+      {
+        locationName: 'LA',
+        startDate: '2021-12-01',
+        lat: '34.0522',
+        lng: '-118.2437',
+        timeSpent: 10,
+      },
+      {
+        locationName: 'Las Vegas',
+        lat: '36.1699',
+        lng: '-115.1398',
+        timeSpent: 5,
+      },
+    ],
+  };
+
+  try {
+    const response = await axios({
+      method: 'POST',
+      url: 'http://localhost:3001/api/trips',
+      data: {
+        userID: '',
+        trip: trip,
+      },
+    });
+    fail('Should have thrown an exception.');
+  } catch (error) {
+    const { response } = error;
+    expect(response).toBeDefined();
+    expect(response.status).toBe(401);
+  }
 });

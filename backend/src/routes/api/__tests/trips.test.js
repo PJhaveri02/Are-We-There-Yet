@@ -174,3 +174,21 @@ it('returns a 404 when attempting to retrieve a nonexistant trip (valid id)', as
     expect(response.status).toBe(404);
   }
 });
+
+it('returns a 400 when attempting to retrieve a nonexistant trip (invalid id)', async () => {
+  try {
+    const response = await axios({
+      method: 'GET',
+      url: 'http://localhost:3001/api/trips/randomID',
+      data: {
+        userID: 'ABC123',
+      },
+    });
+    fail('Should have thrown an exception.');
+  } catch (err) {
+    const { response } = err;
+    expect(response).toBeDefined();
+    expect(response.status).toBe(400);
+    expect(response.data).toBe('Invalid ID');
+  }
+});

@@ -311,3 +311,48 @@ it('401 when adding trip and not authorised', async () => {
     expect(response.status).toBe(401);
   }
 });
+
+it('Deletes a trip', async () => {
+  const response = await axios({
+    method: 'DELETE',
+    url: 'http://localhost:3001/api/trips/000000000000000000000003',
+    data: {
+      userID: 'ABC123',
+    },
+  });
+  expect(response.status).toBe(204);
+
+  // Check db item was deleted
+  expect(await Trip.findById('000000000000000000000003')).toBeNull();
+});
+
+it("Doesn't delete trip when not needed", async () => {
+  const response = await axios({
+    method: 'DELETE',
+    url: 'http://localhost:3001/api/trips/000000000000000000000013',
+    data: {
+      userID: 'ABC123',
+    },
+  });
+  expect(response.status).toBe(204);
+
+  expect(await Trip.countDocuments()).toBe(3);
+});
+
+it("401 when deleting someone else's trip", async () => {
+  try {
+    await axios({
+      method: 'DELETE',
+      url: 'http://localhost:3001/api/trips/000000000000000000000002',
+      data: {
+        userID: 'ABC123',
+      },
+    });
+    fail('Should have trown an error');
+  } catch (err) {
+    const { response } = err;
+    expect(response).toBeDefined();
+    expect(response.status).toBe(401);
+    expect(await Trip.countDocuments()).toBe(3);
+  }
+});

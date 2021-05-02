@@ -192,3 +192,37 @@ it('returns a 400 when attempting to retrieve a nonexistant trip (invalid id)', 
     expect(response.data).toBe('Invalid ID');
   }
 });
+
+it('401 should be thrown when no id given', async () => {
+  try {
+    const response = await axios({
+      method: 'GET',
+      url: 'http://localhost:3001/api/trips/000000000000000000000001',
+      data: {
+        userID: '',
+      },
+    });
+    fail('Should have thrown an exception.');
+  } catch (error) {
+    const { response } = error;
+    expect(response).toBeDefined();
+    expect(response.status).toBe(401);
+  }
+});
+
+it("401 should be thrown when access other's trip ", async () => {
+  try {
+    const response = await axios({
+      method: 'GET',
+      url: 'http://localhost:3001/api/trips/000000000000000000000001',
+      data: {
+        userID: 'USER2',
+      },
+    });
+    fail('Should have thrown an exception.');
+  } catch (error) {
+    const { response } = error;
+    expect(response).toBeDefined();
+    expect(response.status).toBe(401);
+  }
+});

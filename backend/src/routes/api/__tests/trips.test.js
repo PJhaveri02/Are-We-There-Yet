@@ -226,3 +226,51 @@ it("401 should be thrown when access other's trip ", async () => {
     expect(response.status).toBe(401);
   }
 });
+
+it('Create a new trip', async () => {
+  const trip = {
+    title: 'USA',
+    stops: [
+      {
+        locationName: 'LA',
+        startDate: '2021-12-01',
+        lat: '34.0522',
+        lng: '-118.2437',
+        timeSpent: 10,
+      },
+      {
+        locationName: 'Las Vegas',
+        lat: '36.1699',
+        lng: '-115.1398',
+        timeSpent: 5,
+      },
+    ],
+  };
+
+  const response = await axios({
+    method: 'POST',
+    url: 'http://localhost:3001/api/trips',
+    data: {
+      userID: 'USER2',
+      trip: trip,
+    },
+  });
+
+  //Check response if correct
+  expect(response.status).toBe(201);
+  expect(response.data).toBeDefined();
+  const responseTrip = response.data;
+  expect(responseTrip.title).toEqual(trip.title);
+  expect(responseTrip.description).toEqual(trip.description);
+  expect(responseTrip.stops.locationName).toEqual(trip.stops.locationName);
+  expect(responseTrip.stops.lat).toEqual(trip.stops.lat);
+  expect(responseTrip.stops.lng).toEqual(trip.stops.lng);
+
+  // Check added to database
+  const dbTrip = await Trip.findById(responseTrip._id);
+  expect(dbTrip.title).toEqual(trip.title);
+  expect(dbTrip.description).toEqual(trip.description);
+  expect(dbTrip.stops.locationName).toEqual(trip.stops.locationName);
+  expect(dbTrip.stops.lat).toEqual(trip.stops.lat);
+  expect(dbTrip.stops.lng).toEqual(trip.stops.lng)
+});

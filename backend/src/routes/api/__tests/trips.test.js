@@ -400,3 +400,139 @@ it('updates a trip successfully', async () => {
   expect(dbTrip.stops.lat).toEqual(toUpdate.stops.lat);
   expect(dbTrip.stops.lng).toEqual(toUpdate.stops.lng);
 });
+
+it('Gives a 404 when updating a nonexistant trip', async () => {
+  try {
+    const toUpdate = {
+      _id: new mongoose.mongo.ObjectId('000000000000000000000021'),
+      title: 'Trip 1 - Updated',
+      description: 'First ever trip - Updated',
+      stops: [
+        {
+          locationName: 'Sky City',
+          startDate: '2021-04-01',
+          lat: '-36.8488',
+          lng: '174.7617',
+          timeSpent: 3,
+        },
+        {
+          locationName: 'UOA',
+          lat: '-36.8523',
+          lng: '174.7691',
+          timeSpent: 2,
+        },
+      ],
+    };
+
+    await axios({
+      method: 'PUT',
+      url: 'http://localhost:3001/api/trips/000000000000000000000021',
+      data: {
+        userID: 'ABC123',
+        trip: toUpdate,
+      },
+    });
+    fail('Should have returned a 404');
+  } catch (err) {
+    const { response } = err;
+    expect(response).toBeDefined();
+    expect(response.status).toBe(404);
+
+    // Make sure something wasn't added to the db
+    expect(await Trip.countDocuments()).toBe(3);
+  }
+});
+
+it("401 when updating somone else's trip", async () => {
+  try {
+    const toUpdate = {
+      _id: new mongoose.mongo.ObjectId('000000000000000000000002'),
+      title: 'Trip 1 - Updated',
+      description: 'First ever trip - Updated',
+      stops: [
+        {
+          locationName: 'Sky City',
+          startDate: '2021-04-01',
+          lat: '-36.8488',
+          lng: '174.7617',
+          timeSpent: 3,
+        },
+        {
+          locationName: 'UOA',
+          lat: '-36.8523',
+          lng: '174.7691',
+          timeSpent: 2,
+        },
+      ],
+    };
+
+    await axios({
+      method: 'PUT',
+      url: 'http://localhost:3001/api/trips/000000000000000000000002',
+      data: {
+        userID: 'ABC123',
+        trip: toUpdate,
+      },
+    });
+    fail('Should have returned a 401');
+  } catch (err) {
+    const { response } = err;
+    expect(response).toBeDefined();
+    expect(response.status).toBe(401);
+
+    // Make sure something wasn't added to the db
+    expect(await Trip.countDocuments()).toBe(3);
+  }
+});
+
+it('Uses path ID instead of body ID when updating a trip', async () => {
+  const toUpdate = {
+    _id: new mongoose.mongo.ObjectId('000000000000000000000003'),
+    title: 'Trip 1 - Updated',
+    description: 'First ever trip - Updated',
+    stops: [
+      {
+        locationName: 'Sky City',
+        startDate: '2021-04-01',
+        lat: '-36.8488',
+        lng: '174.7617',
+        timeSpent: 3,
+      },
+      {
+        locationName: 'UOA',
+        lat: '-36.8523',
+        lng: '174.7691',
+        timeSpent: 2,
+      },
+    ],
+  };
+
+  const response = await axios({
+    method: 'PUT',
+    url: 'http://localhost:3001/api/trips/000000000000000000000001',
+    data: {
+      userID: 'ABC123',
+      trip: toUpdate,
+    },
+  });
+
+  // Check response
+  expect(response.status).toBe(204);
+
+  // Ensure DB was updated
+  let dbTrip = await Trip.findById('000000000000000000000001');
+  expect(dbTrip.title).toEqual(toUpdate.title);
+  expect(dbTrip.description).toEqual(toUpdate.description);
+  expect(dbTrip.stops.locationName).toEqual(toUpdate.stops.locationName);
+  expect(dbTrip.stops.lat).toEqual(toUpdate.stops.lat);
+  expect(dbTrip.stops.lng).toEqual(toUpdate.stops.lng);
+
+  // Ensure incorrect DB was not updated
+  const unChangedTrip = dummyData[1].trip;
+  dbTrip = await Trip.findById('000000000000000000000003');
+  expect(dbTrip.title).toEqual(unChangedTrip.title);
+  expect(dbTrip.description).toEqual(unChangedTrip.description);
+  expect(dbTrip.stops.locationName).toEqual(unChangedTrip.stops.locationName);
+  expect(dbTrip.stops.lat).toEqual(unChangedTrip.stops.lat);
+  expect(dbTrip.stops.lng).toEqual(unChangedTrip.stops.lng);
+});

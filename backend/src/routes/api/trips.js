@@ -69,7 +69,7 @@ router.post('/', async (req, res) => {
 
   const trip = { ...req.body.trip, userID: userID };
   const newTrip = await createTrip(trip);
-  res.sendStatus(HTTP_CREATED).header('location', `/api/trips/${newTrip._id}`).json(newTrip);
+  res.status(HTTP_CREATED).header('location', `/api/trips/${newTrip._id}`).json(newTrip);
 });
 
 // Update trip

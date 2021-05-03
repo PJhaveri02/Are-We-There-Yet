@@ -1,13 +1,19 @@
-import React from "react";
-import Trip from "./NewTripModal";
+import React from 'react';
+import { TripView } from './TripView';
 
 function TripList() {
-    return (
-        <div>
-            <Trip />
-            {/* TODO show a list of trips */}
-        </div>
-    );
+  const dummyTrip = [{ title: 'T1' }];
+  return (
+    <div>
+      {dummyTrip.length > 0 ? (
+        dummyTrip.map((trip, index) => {
+          return <TripView trip={trip} key={index} />;
+        })
+      ) : (
+        <div>No Trips, create some trips</div>
+      )}
+    </div>
+  );
 }
 
 export default TripList;

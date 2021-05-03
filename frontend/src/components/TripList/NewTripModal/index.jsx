@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Searchbar from './Searchbar';
 import DestinationList from './DestinationList';
 
-function SearchBar() {
+function NewTripModal() {
   const [destinations, setDestinations] = useState([]);
 
   const onDestinationSelect = (destination, lat, lng) => {
@@ -16,7 +16,7 @@ function SearchBar() {
         lng: lng,
       },
     ]);
-    console.log(destinations);
+    // console.log(destinations);
   };
 
   return (
@@ -28,4 +28,4 @@ function SearchBar() {
   );
 }
 
-export default SearchBar;
+export default NewTripModal;

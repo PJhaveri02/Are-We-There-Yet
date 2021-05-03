@@ -1,13 +1,11 @@
 import { createContext, useState } from 'react';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import * as Realm from 'realm-web';
-import MapVisualiser from './components/map-visualiser/MapVisualiser';
 import LoginPage from './components/signing-pages/LoginPage';
 import SignUp from './components/signing-pages/SignUp';
-import Trip from './components/TripList/Trip';
 import { useLoadScript } from '@react-google-maps/api';
 import Logo from './components/logo/Logo.jsx';
-import TripList from './components/TripList';
+import Homepage from "./pages/Homepage";
 
 // Realm app to authenticate user
 const REALM_APP_ID = 'are-we-there-yet-zaqns';
@@ -44,12 +42,7 @@ function App() {
             <Route exact path='/home'>
               {user ? (
                 <div>
-                  <div>
-                    <TripList />
-                  </div>
-                  <div>
-                    <MapVisualiser />
-                  </div>
+                  <Homepage />
                 </div>
               ) : (
                 <Redirect to='/' />

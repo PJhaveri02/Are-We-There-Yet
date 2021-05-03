@@ -1,12 +1,11 @@
+import { useLoadScript } from '@react-google-maps/api';
 import { createContext, useState } from 'react';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import * as Realm from 'realm-web';
+import Logo from './components/logo/Logo.jsx';
 import LoginPage from './components/signing-pages/LoginPage';
 import SignUp from './components/signing-pages/SignUp';
-import { useLoadScript } from '@react-google-maps/api';
-import Logo from './components/logo/Logo.jsx';
 import Homepage from './pages/Homepage';
-import TripList from './components/TripList';
 
 // Realm app to authenticate user
 const REALM_APP_ID = 'are-we-there-yet-zaqns';
@@ -51,7 +50,7 @@ function App() {
             </Route>
 
             <Route path='*'>
-              <TripList />
+              <p>404 Page not Found</p>
             </Route>
           </Switch>
         </Router>

@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 
 export default function Slider(props) {
-  const { min, max, defaultValue, step, points } = props;
+  const { min, max, defaultValue, step, points, onChangeSlider } = props;
   const [value, setValue] = useState(defaultValue);
-
   const handleSliderEvent = (e) => {
     const tgtValue = e.target.value;
     let bestDiff = Number.MAX_VALUE;
@@ -13,14 +12,10 @@ export default function Slider(props) {
       if (Math.abs(tgtValue - points[i]) <= bestDiff) {
         closerTo = points[i];
         bestDiff = Math.abs(tgtValue - points[i]);
-      }
-
-      if (!closerTo) {
-        setValue(tgtValue);
-      } else {
-        setValue(closerTo);
+        onChangeSlider(i + 1);
       }
     }
+    setValue(closerTo);
   };
 
   return (
@@ -34,6 +29,7 @@ export default function Slider(props) {
         onChange={(e) => {
           handleSliderEvent(e);
         }}
+
       />
       <div>
         <p>{`At: ${value}`}</p>

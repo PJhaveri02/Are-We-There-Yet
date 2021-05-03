@@ -25,6 +25,9 @@ export default function Map(props) {
   const [path, setPath] = useState();
   const [, setPathInfo] = useState();
   const [circleMarker, setCircleMarker] = useState();
+  const [sliderDistance, setSliderDistance] = useState();
+  const [sliderPosition, setSliderPosition] = useState(1);
+  const [center, setCenter] = useState(defaultCenter);
 
   // Retain map throughout the lifecycle of component
   const mapRef = useRef();
@@ -70,13 +73,34 @@ export default function Map(props) {
           lat: `${legs[0].end_location.lat()}`,
           lng: `${legs[0].end_location.lng()}`,
         },
-
         path: polyPaths,
       });
 
       setNotDSRendered(false);
     }
   }, [directions]);
+
+  // When stops parameter changes, render the slider time
+  useEffect(() => {
+    let currentDistance = 0;
+    let sliderDistance = [0];
+    stops.map((stop, index) => {
+      if (index > 0) {
+        currentDistance += stop.timeSpent;
+        sliderDistance.push(currentDistance);
+      }
+      return currentDistance;
+    });
+    setSliderDistance(sliderDistance);
+  }, [stops]);
+
+  // When the slider position has been set
+  useEffect(() => {
+     setCenter({
+        lat: stops[sliderPosition - 1].lat,
+        lng: stops[sliderPosition - 1].lng,
+      })
+  },[sliderPosition, stops]);
 
   // A callback function to be called when the DirectionsService has obtained a response
   const directionsCallback = (response, status) => {
@@ -92,18 +116,22 @@ export default function Map(props) {
 
   return (
     <div>
-      <Slider
-        min={0}
-        max={100}
-        defaultValue={0}
-        step={1}
-        points={[0, 1, 2, 5, 10, 100]}
-      />
+      {sliderDistance && (
+        <Slider
+          min={sliderDistance[0]}
+          max={sliderDistance[sliderDistance.length - 1]}
+          defaultValue={0}
+          step={1}
+          points={sliderDistance}
+          onChangeSlider = {setSliderPosition}
+        />
+      )}
+
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         options={DEFAULT_MAP_SETTINGS}
         zoom={defaultZoom}
-        center={defaultCenter}
+        center={center}
         onLoad={onMapLoad}
       >
         {origin && destination && notDSRendered && (
@@ -137,7 +165,7 @@ export default function Map(props) {
               }}
             />
           ))}
-        {origin ? (
+        {/* {origin ? (
           <Marker
             key={"ORIGIN"}
             position={{ lat: origin.lat, lng: origin.lng }}
@@ -149,8 +177,13 @@ export default function Map(props) {
             key={"DESTINATION"}
             position={{ lat: destination.lat, lng: destination.lng }}
           />
-        ) : null}
+        ) : null} */}
 
+        {sliderPosition && (
+          <Marker 
+          key={"SLIDER"}
+          position={{ lat: stops[sliderPosition - 1].lat, lng: stops[sliderPosition - 1].lng}}/>
+        )}
         {stops
           ? stops.map((stop, index) => (
               <Marker

@@ -1,0 +1,12 @@
+.Homepage {
+    display: flex;
+}
+
+.TripList {
+    display: inline-block;
+    width: 25%;
+}
+
+.visualizer {
+    display: inline-block;
+}

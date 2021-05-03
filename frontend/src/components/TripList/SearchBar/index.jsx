@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import Searchbar from "./Searchbar";
-import DestinationList from "./DestinationList";
+import React, { useState } from 'react';
+import Searchbar from './Searchbar';
+import DestinationList from './DestinationList';
 
-function Trip() {
+function SearchBar() {
   const [destinations, setDestinations] = useState([]);
 
   const onDestinationSelect = (destination, lat, lng) => {
     setDestinations([
       ...destinations,
       {
-        startDate: "2021-04-27",
+        startDate: '2021-04-27',
         locationName: destination,
         timeSpent: 1,
         lat: lat,
@@ -27,4 +27,4 @@ function Trip() {
   );
 }
 
-export default Trip;
+export default SearchBar;

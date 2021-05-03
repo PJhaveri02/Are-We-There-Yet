@@ -1,5 +1,5 @@
 import React from "react";
-import Trip from "./Trip";
+import Trip from "./SearchBar";
 
 function TripList() {
     return (

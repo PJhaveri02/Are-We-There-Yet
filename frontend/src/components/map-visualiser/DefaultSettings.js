@@ -9,7 +9,7 @@ const defaultCenter = {
 const defaultZoom = 14;
 
 const mapContainerStyle = {
-  width: "100vw",
+  width: "75vw",
   height: "100vh",
 };
 

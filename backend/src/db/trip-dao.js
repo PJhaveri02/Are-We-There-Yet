@@ -40,7 +40,7 @@ export const createTrip = async (trip) => {
 // Function that allows users to modify their own trip
 export const modifyTrip = async (trip) => {
   const currentTrip = await Trip.findById(trip._id);
-  if (currentTrip && currentTrip.useID !== trip.userID) {
+  if (currentTrip && currentTrip.userID !== trip.userID) {
     return HTTP_UNAUTHORISED;
   }
 

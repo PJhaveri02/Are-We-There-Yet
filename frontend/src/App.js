@@ -4,9 +4,10 @@ import * as Realm from 'realm-web';
 import MapVisualiser from './components/map-visualiser/MapVisualiser';
 import LoginPage from './components/signing-pages/LoginPage';
 import SignUp from './components/signing-pages/SignUp';
-import Trip from './components/Trip';
+import Trip from './components/TripList/Trip';
 import { useLoadScript } from '@react-google-maps/api';
 import Logo from './components/logo/Logo.jsx';
+import TripList from './components/TripList';
 
 // Realm app to authenticate user
 const REALM_APP_ID = 'are-we-there-yet-zaqns';
@@ -44,7 +45,7 @@ function App() {
               {user ? (
                 <div>
                   <div>
-                    <Trip />
+                    <TripList />
                   </div>
                   <div>
                     <MapVisualiser />

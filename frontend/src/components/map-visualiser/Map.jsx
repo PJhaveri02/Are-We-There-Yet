@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import Slider from "./Slider";
 import circle from "../../assets/circle2.png";
 import {
   DEFAULT_TRAVEL_MODE,
-  defaultCenter,
   defaultZoom,
   mapContainerStyle,
   DEFAULT_MAP_SETTINGS,
@@ -18,16 +16,13 @@ import {
 } from "@react-google-maps/api";
 
 export default function Map(props) {
-  const { origin, destination, travelMode, stops } = props;
+  const { origin, destination, travelMode, stops, sliderPosition, center } = props;
 
   const [directions, setDirections] = useState();
   const [notDSRendered, setNotDSRendered] = useState(true);
   const [path, setPath] = useState();
   const [, setPathInfo] = useState();
   const [circleMarker, setCircleMarker] = useState();
-  const [sliderDistance, setSliderDistance] = useState();
-  const [sliderPosition, setSliderPosition] = useState(1);
-  const [center, setCenter] = useState(defaultCenter);
 
   // Retain map throughout the lifecycle of component
   const mapRef = useRef();
@@ -80,28 +75,6 @@ export default function Map(props) {
     }
   }, [directions]);
 
-  // When stops parameter changes, render the slider time
-  useEffect(() => {
-    let currentDistance = 0;
-    let sliderDistance = [0];
-    stops.map((stop, index) => {
-      if (index > 0) {
-        currentDistance += stop.timeSpent;
-        sliderDistance.push(currentDistance);
-      }
-      return currentDistance;
-    });
-    setSliderDistance(sliderDistance);
-  }, [stops]);
-
-  // When the slider position has been set
-  useEffect(() => {
-     setCenter({
-        lat: stops[sliderPosition - 1].lat,
-        lng: stops[sliderPosition - 1].lng,
-      })
-  },[sliderPosition, stops]);
-
   // A callback function to be called when the DirectionsService has obtained a response
   const directionsCallback = (response, status) => {
     if (response && status === "OK") {
@@ -115,18 +88,7 @@ export default function Map(props) {
   };
 
   return (
-    <div>
-      {sliderDistance && (
-        <Slider
-          min={sliderDistance[0]}
-          max={sliderDistance[sliderDistance.length - 1]}
-          defaultValue={0}
-          step={1}
-          points={sliderDistance}
-          onChangeSlider = {setSliderPosition}
-        />
-      )}
-
+    <div>        
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         options={DEFAULT_MAP_SETTINGS}

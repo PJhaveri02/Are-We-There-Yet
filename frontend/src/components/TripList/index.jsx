@@ -19,11 +19,9 @@ function TripList() {
 
   const handleNewTrip = () => {
     setDisplay(true);
-    console.log(display);
   };
 
   const handleCancel = () => {
-    console.log('bruh');
     setDisplay(false);
   };
 

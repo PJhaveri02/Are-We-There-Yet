@@ -1,12 +1,30 @@
 import React, { useState } from "react";
 import Searchbar from "./Searchbar";
 import DestinationList from "./DestinationList";
-import { Modal } from "@material-ui/core";
+import { makeStyles, Modal, Button } from "@material-ui/core";
+
+const useStyles = makeStyles((theme) => ({
+  modal: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  paper: {
+    position: "absolute",
+    width: 450,
+    height: 450,
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
+}));
 
 function NewTripModal(props) {
-  // const { onCancel } = props;
   const { open, onCancel } = props;
+  const classes = useStyles();
+
   const [destinations, setDestinations] = useState([]);
+  const [title, setTitle] = useState("");
 
   const onDestinationSelect = (destination, lat, lng) => {
     setDestinations([
@@ -21,13 +39,42 @@ function NewTripModal(props) {
     ]);
   };
 
+  const handleCloseModal = () => {
+    setTitle("");
+    setDestinations([]);
+    onCancel();
+  };
+
   return (
-    <Modal open={open} onClose={onCancel}>
-      <div>
+    <Modal className={classes.modal} open={open} onClose={handleCloseModal}>
+      <div className={classes.paper}>
         <div>
-          {/* TODO name, start date */}
+          <label>Title: </label>
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </div>
+
+        <div>
           <DestinationList destinations={destinations} />
+        </div>
+
+        <div>
           <Searchbar onDestinationSelect={onDestinationSelect} />
+        </div>
+
+        <div>
+          <Button color="secondary" variant="contained">
+            confirm
+          </Button>
+        </div>
+
+        <div>
+          <Button color="grey" variant="contained" onClick={handleCloseModal}>
+            cancel
+          </Button>
         </div>
       </div>
     </Modal>

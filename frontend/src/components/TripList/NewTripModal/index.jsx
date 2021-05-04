@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Searchbar from "./Searchbar";
 import DestinationList from "./DestinationList";
 import moment from "moment";
 import { makeStyles, Modal, Button, TextField } from "@material-ui/core";
+import { AuthContext } from "../../../App";
+import { createTrip } from "../../../api/crudOperations";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -24,8 +26,10 @@ function NewTripModal(props) {
   const { open, onCancel } = props;
   const classes = useStyles();
   const currentDate = moment().format("YYYY-MM-DD");
+  const [user] = useContext(AuthContext);
 
   const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [selectedDate, setSelectedDate] = useState(currentDate);
   const [destinations, setDestinations] = useState([]);
 
@@ -33,7 +37,7 @@ function NewTripModal(props) {
     setDestinations([
       ...destinations,
       {
-        startDate: "2021-04-27",
+        startDate: selectedDate,
         locationName: destination,
         timeSpent: 1,
         lat: lat,
@@ -44,6 +48,7 @@ function NewTripModal(props) {
 
   const handleCloseModal = () => {
     setTitle("");
+    setDescription("");
     setSelectedDate(currentDate);
     setDestinations([]);
     onCancel();
@@ -53,6 +58,15 @@ function NewTripModal(props) {
     console.log(title);
     console.log(selectedDate);
     console.log(destinations);
+
+    createTrip(user.id, {
+      title: title,
+      description: "",
+      stops: destinations,
+      userID: user.id,
+    })
+
+    handleCloseModal();
   };
 
   return (
@@ -64,6 +78,15 @@ function NewTripModal(props) {
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+          />
+        </div>
+
+        <div>
+          <label>Description: </label>
+          <input
+            type="text"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
           />
         </div>
 

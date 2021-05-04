@@ -16,6 +16,25 @@ const HTTP_BAD_REQUEST = 400;
 
 const router = express.Router();
 
+// Add headers
+router.use(function (req, res, next) {
+  // Website you wish to allow to connect
+  res.setHeader('Access-Control-Allow-Origin', '*');
+
+  // Request methods you wish to allow
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+
+  // Request headers you wish to allow
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+  // Set to true if you need the website to include cookies in the requests sent
+  // to the API (e.g. in case you use sessions)
+  res.setHeader('Access-Control-Allow-Credentials', true);
+
+  // Pass to next layer of middleware
+  next();
+});
+
 router.use('/:id', async (req, res, next) => {
   const { id } = req.params;
   if (mongoose.isValidObjectId(id)) {
@@ -27,7 +46,7 @@ router.use('/:id', async (req, res, next) => {
 
 // Retrieve all of users trip. The users id is provided in request body
 router.get('/', async (req, res) => {
-  const userID = req.body.userID;
+  const userID = req.query.userID;
 
   if (!userID) {
     res.sendStatus(HTTP_UNAUTHORISED);
@@ -40,7 +59,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   const { id } = req.params;
   const trip = await retrieveTrip(id);
-  const userID = req.body.userID;
+  const userID = req.query.userID;
 
   if (!trip) {
     res.sendStatus(HTTP_NOT_FOUND);

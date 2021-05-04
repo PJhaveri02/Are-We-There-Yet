@@ -1,12 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { retrieveAllTrips } from '../../api/crudOperations';
 import { TripView } from './TripView';
 
 function TripList() {
-  const dummyTrip = [{ title: 'T1' }];
+  const [trips, setTrips] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    retrieveAllTrips('ABC123', setLoading, setTrips);
+  }, []);
+
   return (
     <div>
-      {dummyTrip.length > 0 ? (
-        dummyTrip.map((trip, index) => {
+      {loading ? (
+        <p>loading</p>
+      ) : trips.length > 0 ? (
+        trips.map((trip, index) => {
           return <TripView trip={trip} key={index} />;
         })
       ) : (

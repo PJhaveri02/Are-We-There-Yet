@@ -10,7 +10,7 @@ const defaultZoom = 14;
 
 const mapContainerStyle = {
   width: "75vw",
-  height: "100vh",
+  height: "75vh",
 };
 
 // See https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions for options

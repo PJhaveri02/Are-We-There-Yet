@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
-import Slider from "./Slider";
 import circle from "../../assets/circle2.png";
 import {
   DEFAULT_TRAVEL_MODE,
-  defaultCenter,
   defaultZoom,
   mapContainerStyle,
   DEFAULT_MAP_SETTINGS,
@@ -18,7 +16,7 @@ import {
 } from "@react-google-maps/api";
 
 export default function Map(props) {
-  const { origin, destination, travelMode, stops } = props;
+  const { origin, destination, travelMode, stops, sliderPosition, center } = props;
 
   const [directions, setDirections] = useState();
   const [notDSRendered, setNotDSRendered] = useState(true);
@@ -70,7 +68,6 @@ export default function Map(props) {
           lat: `${legs[0].end_location.lat()}`,
           lng: `${legs[0].end_location.lng()}`,
         },
-
         path: polyPaths,
       });
 
@@ -91,19 +88,12 @@ export default function Map(props) {
   };
 
   return (
-    <div>
-      <Slider
-        min={0}
-        max={100}
-        defaultValue={0}
-        step={1}
-        points={[0, 1, 2, 5, 10, 100]}
-      />
+    <div>        
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         options={DEFAULT_MAP_SETTINGS}
         zoom={defaultZoom}
-        center={defaultCenter}
+        center={center}
         onLoad={onMapLoad}
       >
         {origin && destination && notDSRendered && (
@@ -137,7 +127,7 @@ export default function Map(props) {
               }}
             />
           ))}
-        {origin ? (
+        {/* {origin ? (
           <Marker
             key={"ORIGIN"}
             position={{ lat: origin.lat, lng: origin.lng }}
@@ -149,8 +139,13 @@ export default function Map(props) {
             key={"DESTINATION"}
             position={{ lat: destination.lat, lng: destination.lng }}
           />
-        ) : null}
+        ) : null} */}
 
+        {sliderPosition && (
+          <Marker 
+          key={"SLIDER"}
+          position={{ lat: stops[sliderPosition - 1].lat, lng: stops[sliderPosition - 1].lng}}/>
+        )}
         {stops
           ? stops.map((stop, index) => (
               <Marker

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Searchbar from "./Searchbar";
 import DestinationList from "./DestinationList";
-import { makeStyles, Modal, Button } from "@material-ui/core";
+import moment from "moment";
+import { makeStyles, Modal, Button, TextField } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -22,9 +23,11 @@ const useStyles = makeStyles((theme) => ({
 function NewTripModal(props) {
   const { open, onCancel } = props;
   const classes = useStyles();
+  const currentDate = moment().format("YYYY-MM-DD");
 
-  const [destinations, setDestinations] = useState([]);
   const [title, setTitle] = useState("");
+  const [selectedDate, setSelectedDate] = useState(currentDate);
+  const [destinations, setDestinations] = useState([]);
 
   const onDestinationSelect = (destination, lat, lng) => {
     setDestinations([
@@ -41,8 +44,15 @@ function NewTripModal(props) {
 
   const handleCloseModal = () => {
     setTitle("");
+    setSelectedDate(currentDate);
     setDestinations([]);
     onCancel();
+  };
+
+  const handleConfirm = () => {
+    console.log(title);
+    console.log(selectedDate);
+    console.log(destinations);
   };
 
   return (
@@ -58,6 +68,17 @@ function NewTripModal(props) {
         </div>
 
         <div>
+          <label>Date: </label>
+          <TextField
+            fullWidth
+            variant="outlined"
+            type="date"
+            defaultValue={currentDate}
+            onChange={(e) => setSelectedDate(e.target.value)}
+          />
+        </div>
+
+        <div>
           <DestinationList destinations={destinations} />
         </div>
 
@@ -66,13 +87,13 @@ function NewTripModal(props) {
         </div>
 
         <div>
-          <Button color="secondary" variant="contained">
+          <Button color="secondary" variant="contained" onClick={handleConfirm}>
             confirm
           </Button>
         </div>
 
         <div>
-          <Button color="grey" variant="contained" onClick={handleCloseModal}>
+          <Button color="default" variant="contained" onClick={handleCloseModal}>
             cancel
           </Button>
         </div>

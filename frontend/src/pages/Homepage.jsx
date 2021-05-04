@@ -6,7 +6,7 @@ import LogoutButton from '../components/signing-pages/LogoutButton';
 
 function Homepage() {
   return (
-    <div className={styles.Homepage} onClick={() => console.log('trip clicked')}>
+    <div className={styles.Homepage}>
       <div className={styles.TripList}>
         <h1 style={{ textAlign: 'center' }}>Trips</h1>
         <TripList />

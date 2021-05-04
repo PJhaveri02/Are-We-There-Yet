@@ -17,7 +17,7 @@ const dummyTrips = [
         timeSpent: 1,
       },
     ],
-    userID: 'ABC123',
+    userID: '608794d3285468417ce4549b',
   },
   {
     title: 'USA',

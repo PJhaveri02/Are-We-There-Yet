@@ -7,8 +7,8 @@ const stop = new Schema({
   startDate: Date,
   locationName: String,
   timeSpent: Number,
-  lat: String,
-  lng: String,
+  lat: Number,
+  lng: Number,
 });
 
 const tripSchema = new Schema(

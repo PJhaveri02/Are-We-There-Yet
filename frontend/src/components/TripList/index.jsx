@@ -4,18 +4,18 @@ import { AuthContext } from '../../App';
 import { TripView } from './TripView';
 import NewTripButton from './NewTripButton';
 import NewTripModal from './NewTripModal';
+import { ResourceContext } from '../../pages/Homepage';
 
 function TripList() {
-  const [trips, setTrips] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [user] = useContext(AuthContext);
-  const [version, setVersion] = useState(0);
   const [display, setDisplay] = useState(false);
+
+  const { trips, setTrips, version, setVersion, loading, setLoading } = useContext(ResourceContext);
 
   // Retrieve trips
   useEffect(() => {
     retrieveAllTrips(user.id, setLoading, setTrips);
-  }, [user, version]);
+  }, [user, version, setLoading, setTrips]);
 
   const handleNewTrip = () => {
     setDisplay(true);

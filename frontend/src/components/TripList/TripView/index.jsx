@@ -1,10 +1,13 @@
 import { IconButton, makeStyles } from '@material-ui/core';
 import Accordion from '@material-ui/core/Accordion';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import Typography from '@material-ui/core/Typography';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-import React from 'react';
+import React, { useContext } from 'react';
 import { deleteTrip } from '../../../api/crudOperations';
+import { ResourceContext } from '../../../pages/Homepage';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const TripView = ({ trip, userID, setVersion }) => {
   const classes = useStyles();
+  const { setTrip } = useContext(ResourceContext);
 
   const handleTripDelete = async () => {
     await deleteTrip(userID, trip._id);
@@ -31,18 +35,23 @@ export const TripView = ({ trip, userID, setVersion }) => {
   };
 
   return (
-    <div className={classes.root} onClick={() => console.log('trip clicked')}>
-      <Accordion>
-        <AccordionSummary aria-controls='panel1a-content' id='panel1a-header'>
-          <div className={classes.summary}>
-            <Typography className={classes.heading}>{trip.title}</Typography>
-            <span style={{ flexGrow: 1 }} />
-            <IconButton aria-label='delete' color='secondary' onClick={() => handleTripDelete()}>
-              <DeleteForeverIcon />
-            </IconButton>
-          </div>
-        </AccordionSummary>
-      </Accordion>
-    </div>
+    <Accordion className={classes.root} onClick={() => setTrip(trip)}>
+      <AccordionSummary
+        aria-controls='panel1a-content'
+        id='panel1a-header'
+        expandIcon={<ExpandMoreIcon />}
+      >
+        <div className={classes.summary}>
+          <Typography className={classes.heading}>{trip.title}</Typography>
+          <span style={{ flexGrow: 1 }} />
+          <IconButton aria-label='delete' color='secondary' onClick={() => handleTripDelete()}>
+            <DeleteForeverIcon />
+          </IconButton>
+        </div>
+      </AccordionSummary>
+      <AccordionDetails>
+        <Typography>{trip.description ? trip.description : 'No trip description'}</Typography>
+      </AccordionDetails>
+    </Accordion>
   );
 };

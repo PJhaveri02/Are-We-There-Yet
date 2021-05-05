@@ -55,16 +55,12 @@ function NewTripModal(props) {
   };
 
   const handleConfirm = () => {
-    console.log(title);
-    console.log(selectedDate);
-    console.log(destinations);
-
     createTrip(user.id, {
       title: title,
-      description: "",
+      description: description,
       stops: destinations,
       userID: user.id,
-    })
+    });
 
     handleCloseModal();
   };
@@ -116,7 +112,11 @@ function NewTripModal(props) {
         </div>
 
         <div>
-          <Button color="default" variant="contained" onClick={handleCloseModal}>
+          <Button
+            color="default"
+            variant="contained"
+            onClick={handleCloseModal}
+          >
             cancel
           </Button>
         </div>

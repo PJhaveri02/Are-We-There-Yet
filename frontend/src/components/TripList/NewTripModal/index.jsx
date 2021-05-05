@@ -5,6 +5,7 @@ import moment from "moment";
 import { makeStyles, Modal, Button, TextField } from "@material-ui/core";
 import { AuthContext } from "../../../App";
 import { createTrip } from "../../../api/crudOperations";
+import { ResourceContext } from "../../../pages/Homepage";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -27,6 +28,7 @@ function NewTripModal(props) {
   const classes = useStyles();
   const currentDate = moment().format("YYYY-MM-DD");
   const [user] = useContext(AuthContext);
+  const { setVersion } = useContext(ResourceContext);
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -55,6 +57,11 @@ function NewTripModal(props) {
   };
 
   const handleConfirm = () => {
+    if ( destinations.length === 0 ) {
+      alert("Please enter at least one destination");
+      return;
+    }
+
     createTrip(user.id, {
       title: title,
       description: description,
@@ -62,6 +69,7 @@ function NewTripModal(props) {
       userID: user.id,
     });
 
+    setVersion((prev) => prev + 1);
     handleCloseModal();
   };
 

@@ -31,7 +31,6 @@ export default function MapVisualizer() {
       ) : (
         <Map center={center} />
       )}
-      j
     </div>
   );
 }

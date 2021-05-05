@@ -1,4 +1,4 @@
-const DEFAULT_TRAVEL_MODE = "DRIVING";
+const DEFAULT_TRAVEL_MODE = 'DRIVING';
 
 // Center in Auckland, New Zealand
 const defaultCenter = {
@@ -9,8 +9,8 @@ const defaultCenter = {
 const defaultZoom = 14;
 
 const mapContainerStyle = {
-  width: "75vw",
-  height: "75vh",
+  width: '75vw',
+  height: '100vh',
 };
 
 // See https://developers.google.com/maps/documentation/javascript/reference/map#MapOptions for options
@@ -32,16 +32,16 @@ var getRandomProperty = (obj) => {
 };
 
 const STROKE_COLORS = {
-  blue: "#0000FF",
-  navy: "#000080",
-  green: "#00FF00",
-  yellow: "#FFFF00",
-  red: "#FF0000",
+  blue: '#0000FF',
+  navy: '#000080',
+  green: '#00FF00',
+  yellow: '#FFFF00',
+  red: '#FF0000',
 };
 
 const DEFAULT_POLYLINE_OPT = {
   geodesic: true,
-  strokeColor: "#89CFF0",
+  strokeColor: '#89CFF0',
   strokeOpacity: 2.0,
   strokeWeight: 4,
 };

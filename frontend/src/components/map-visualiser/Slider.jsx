@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { ResourceContext } from "../../pages/Homepage";
 
 export default function Slider(props) {
   const { step, stops, onChangeSlider, setCenter } = props;
   const [value, setValue] = useState(0);
   const [sliderDistances, setSliderDistances] = useState();
-  const [sliderPosition, setSliderPosition] = useState(1);
+  const {sliderPosition, setSliderPosition} = useContext(ResourceContext);
 
   // When stops parameter changes, render the slider time
   useEffect(() => {
@@ -22,6 +23,7 @@ export default function Slider(props) {
 
   // When the slider position has been set
   useEffect(() => {
+    setValue(sliderPosition - 1);
     setCenter({
       lat: stops[sliderPosition - 1].lat,
       lng: stops[sliderPosition - 1].lng,

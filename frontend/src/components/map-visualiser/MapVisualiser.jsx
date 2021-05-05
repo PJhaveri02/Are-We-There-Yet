@@ -1,25 +1,24 @@
-import React, { useState } from 'react';
-import Map from "./Map";
-import {defaultCenter} from './DefaultSettings';
-import { meadowbank, aucklanduniversity, routes } from "./dummyData";
-import Slider from "./Slider";
+import React, { useContext } from 'react';
+import { ResourceContext } from '../../pages/Homepage';
+import Map from './Map';
 
-export default function MapVisualizer() {
-  
+export default function MapVisualizer({ center, sliderPosition }) {
   // need these two states for map to display location based on slider
-  const [sliderPosition, setSliderPosition] = useState(1);
-  const [center, setCenter] = useState(defaultCenter);
-  
+  const { trip } = useContext(ResourceContext);
+
   return (
     <div>
-      <Map
-        origin={aucklanduniversity}
-        destination={meadowbank}
-        stops={routes}
-        sliderPosition={sliderPosition}
-        center={center}
-      />
-      <Slider step={1} stops={routes} onChangeSlider={setSliderPosition} setCenter={setCenter}/>
+      {trip ? (
+        <Map
+          origin={trip.stops[0]}
+          destination={trip.stops[trip.stops.length - 1]}
+          stops={trip.stops}
+          sliderPosition={sliderPosition}
+          center={center}
+        />
+      ) : (
+        <Map center={center} />
+      )}
     </div>
   );
 }

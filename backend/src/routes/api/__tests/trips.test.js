@@ -116,7 +116,7 @@ it('retrieve all trips successfully', async () => {
   const response = await axios({
     method: 'GET',
     url: 'http://localhost:3001/api/trips',
-    data: {
+    params: {
       userID: 'ABC123',
     },
   });
@@ -142,7 +142,7 @@ it('retrieve a single trip successfully', async () => {
   const response = await axios({
     method: 'GET',
     url: 'http://localhost:3001/api/trips/000000000000000000000001',
-    data: {
+    params: {
       userID: 'ABC123',
     },
   });
@@ -163,7 +163,7 @@ it('returns a 404 when attempting to retrieve a nonexistant trip (valid id)', as
     await axios({
       method: 'GET',
       url: 'http://localhost:3001/api/trips/000000000000000000000000',
-      data: {
+      params: {
         userID: 'ABC123',
       },
     });
@@ -180,7 +180,7 @@ it('returns a 400 when attempting to retrieve a nonexistant trip (invalid id)', 
     await axios({
       method: 'GET',
       url: 'http://localhost:3001/api/trips/randomID',
-      data: {
+      params: {
         userID: 'ABC123',
       },
     });
@@ -198,7 +198,7 @@ it('401 should be thrown when no id given', async () => {
     await axios({
       method: 'GET',
       url: 'http://localhost:3001/api/trips/000000000000000000000001',
-      data: {
+      params: {
         userID: '',
       },
     });
@@ -215,7 +215,7 @@ it("401 should be thrown when access other's trip ", async () => {
     await axios({
       method: 'GET',
       url: 'http://localhost:3001/api/trips/000000000000000000000001',
-      data: {
+      params: {
         userID: 'USER2',
       },
     });

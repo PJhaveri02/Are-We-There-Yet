@@ -1,12 +1,14 @@
 .Homepage {
-    display: flex;
+  display: flex;
+  background-color: #4000ff;
+  height: 100vh;
 }
 
 .TripList {
-    display: inline-block;
-    width: 25%;
+  display: inline-block;
+  width: 25%;
 }
 
 .visualizer {
-    display: inline-block;
+  display: inline-block;
 }

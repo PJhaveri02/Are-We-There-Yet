@@ -5,7 +5,8 @@ const useResources = () => {
   const [trip, setTrip] = useState(undefined);
   const [loading, setLoading] = useState(false);
   const [version, setVersion] = useState(0);
-  return { trips, setTrips, trip, setTrip, loading, setLoading, version, setVersion };
+  const [sliderPosition, setSliderPosition] = useState(1);
+  return { trips, setTrips, trip, setTrip, loading, setLoading, version, setVersion, sliderPosition, setSliderPosition };
 };
 
 export default useResources;

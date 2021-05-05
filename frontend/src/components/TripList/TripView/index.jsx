@@ -4,10 +4,10 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import Typography from '@material-ui/core/Typography';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import React, { useContext } from 'react';
 import { deleteTrip } from '../../../api/crudOperations';
 import { ResourceContext } from '../../../pages/Homepage';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,15 +27,20 @@ const useStyles = makeStyles((theme) => ({
 
 export const TripView = ({ trip, userID, setVersion }) => {
   const classes = useStyles();
-  const { setTrip } = useContext(ResourceContext);
+  const { setTrip, setSliderPosition } = useContext(ResourceContext);
 
   const handleTripDelete = async () => {
     await deleteTrip(userID, trip._id);
     setVersion((prev) => prev + 1);
   };
 
+  const handleClickTrip = () => {
+    setSliderPosition(1);
+    setTrip(trip);
+  }
+
   return (
-    <Accordion className={classes.root} onClick={() => setTrip(trip)}>
+    <Accordion className={classes.root} onClick={() => handleClickTrip()}>
       <AccordionSummary
         aria-controls='panel1a-content'
         id='panel1a-header'

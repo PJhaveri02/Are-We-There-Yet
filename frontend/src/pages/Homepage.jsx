@@ -19,13 +19,15 @@ function Homepage() {
     setLoading,
     version,
     setVersion,
+    sliderPosition,
+    setSliderPosition
   } = useResources();
-  const [sliderPosition, setSliderPosition] = useState(1);
+  
   const [center, setCenter] = useState(defaultCenter);
 
   return (
     <ResourceContext.Provider
-      value={{ trips, setTrips, trip, setTrip, loading, setLoading, version, setVersion }}
+      value={{ trips, setTrips, trip, setTrip, loading, setLoading, version, setVersion, sliderPosition, setSliderPosition }}
     >
       <div className={styles.Homepage}>
         <div className={styles.TripList}>

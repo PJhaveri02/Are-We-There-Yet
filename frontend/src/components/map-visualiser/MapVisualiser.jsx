@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { ResourceContext } from '../../pages/Homepage';
 import Map from './Map';
 
-export default function MapVisualizer({ center, setCenter, sliderPosition, setSliderPosition }) {
+export default function MapVisualizer({ center, sliderPosition }) {
   // need these two states for map to display location based on slider
   const { trip } = useContext(ResourceContext);
 

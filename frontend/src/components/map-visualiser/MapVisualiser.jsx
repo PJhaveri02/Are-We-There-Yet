@@ -1,8 +1,24 @@
-import Map from "./Map";
-import { meadowbank, aucklanduniversity, routes } from "./dummyData";
+import React, { useContext } from 'react';
+import { ResourceContext } from '../../pages/Homepage';
+import Map from './Map';
 
-export default function MapVisualizer() {
+export default function MapVisualizer({ center, setCenter, sliderPosition, setSliderPosition }) {
+  // need these two states for map to display location based on slider
+  const { trip } = useContext(ResourceContext);
+
   return (
-    <Map origin={aucklanduniversity} destination={meadowbank} stops={routes} />
+    <div>
+      {trip ? (
+        <Map
+          origin={trip.stops[0]}
+          destination={trip.stops[trip.stops.length - 1]}
+          stops={trip.stops}
+          sliderPosition={sliderPosition}
+          center={center}
+        />
+      ) : (
+        <Map center={center} />
+      )}
+    </div>
   );
 }

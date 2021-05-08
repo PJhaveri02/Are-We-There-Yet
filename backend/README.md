@@ -1,1 +1,1 @@
-# Running backend
+The Are-We-There-Yet backend server runs on the [Express](https://expressjs.com/) framework which is based on [Node.js](https://nodejs.org/en/). We used [MongoDB](https://www.mongodb.com/) to store the trips and we used [Mongoose](https://mongoosejs.com/) to access and modify the database.

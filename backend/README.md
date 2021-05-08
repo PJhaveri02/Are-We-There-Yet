@@ -22,7 +22,7 @@ Testing is done using the [Jest](https://jestjs.io/) framework combined with an 
 
 ## Running tests
 1. Ensure that a local MongoDB instance is **NOT** running (use `Ctrl` + `C` at the command line to stop)
-2. `cd` to `backend`
+2. If you haven't already, move the current working directory to the backend folder using the following command: `cd` to `backend`
 3. Execute `npm test`
 
 # Documentation

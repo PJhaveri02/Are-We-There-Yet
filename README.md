@@ -12,7 +12,7 @@ Are-We-There-Yet (AWTY) is an itinerary visualisation software that not only all
 1. An integrated map to show the location of where the user will be on their trip at a specified day.
 2. An ability to allow user's add a trip by specifying a starting date, and locations they will visit.
 3. A scrollbar to show users a visualized timeline of their trip.
-4. The persistence of user's trips through a database
+4. The persistence of user's trips through a database.
 5. A login & sign-up page requiring users to provide an email and password.
 
 ## Getting Started

@@ -16,7 +16,7 @@ Are-We-There-Yet (AWTY) is an itinerary visualisation software that not only all
 5. A login & sign-up page requiring users to provide an email and password.
 
 ## Getting Started
-To run this application follow the steps in **Backend** Readme file then the **Frontend** Readme file. The links to the repsective Reamde files are given below"
+To run this application follow the steps in **Backend** Readme file then the **Frontend** Readme file. The links to the repsective Reamde files are given below:
 1. [Backend Readme](https://github.com/PJhaveri02/Are-We-There-Yet/blob/readme-editing/backend/README.md)
 2. [Frontend Readme](https://github.com/PJhaveri02/Are-We-There-Yet/blob/readme-editing/frontend/README.md)
 

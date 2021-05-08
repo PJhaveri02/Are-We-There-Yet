@@ -13,7 +13,7 @@ The Are-We-There-Yet backend server runs on the [Express](https://expressjs.com/
 
 ![image](https://user-images.githubusercontent.com/55341679/117530190-eb25b300-b02f-11eb-9a25-ac369fad602f.png)
 
-# Error in Running backend
+# Error in Running Backend
 If you see an error message similar to the one shown below, then run the command `npm update --force`. This should solve the problem.
 ![image](https://user-images.githubusercontent.com/55341679/117530319-946ca900-b030-11eb-993e-4d086abe1dfc.png)
 
@@ -22,7 +22,7 @@ Testing is done using the [Jest](https://jestjs.io/) framework combined with an 
 
 ## Running tests
 1. Ensure that a local MongoDB instance is **NOT** running (use `Ctrl` + `C` at the command line to stop)
-2. If you haven't already, move the current working directory to the backend folder using the following command: `cd` to `backend`
+2. If you haven't already, move the current working directory to the backend folder using the following command: `cd backend`
 3. Execute `npm test`
 
 # Documentation

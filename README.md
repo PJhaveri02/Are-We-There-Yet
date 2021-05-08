@@ -25,6 +25,6 @@ The following table lists the tasks each member contributed to this project:
 
 | Name   |    GitHub Username     |    Tasks      |
 | ----------- | ----------- |----------------------
-| Daniel Yeom      | danielyeom      | A string representation of the user's unique id
-| Kenny Tang      | kennyt12237     | A JSON Object representing a Trip
-| Pranay Jhaveri      | PJhaveri02     | A JSON Object representing a Trip
+| Daniel Yeom      | [danielyeom](https://github.com/danielyeom)      | A string representation of the user's unique id
+| Kenny Tang      | [kennyt12237](https://github.com/kennyt12237)     | A JSON Object representing a Trip
+| Pranay Jhaveri      | [PJhaveri02](https://github.com/PJhaveri02)     | A JSON Object representing a Trip

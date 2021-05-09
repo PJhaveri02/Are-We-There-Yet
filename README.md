@@ -30,9 +30,9 @@ The following table lists the tasks each member contributed to this project:
 
 | Name   |    GitHub Username     |    Tasks      |
 | ----------- | ----------- |----------------------
-| Daniel Yeom      | [danielyeom](https://github.com/danielyeom)      | A string representation of the user's unique id
-| Kenny Tang      | [kennyt12237](https://github.com/kennyt12237)     | A JSON Object representing a Trip
-| Pranay Jhaveri      | [PJhaveri02](https://github.com/PJhaveri02)     | A JSON Object representing a Trip
+| Daniel Yeom      | [danielyeom](https://github.com/danielyeom)      | <ul><li>Managed team progress</li><li>Documented meeting minutes</li><li>Created the modal that allows users to create trips</li><li>Styled Sidebar</li><li>Fixed bugs</li></ul>
+| Kenny Tang      | [kennyt12237](https://github.com/kennyt12237)     | <ul><li>Created map that allows users to see their trip</li><li>Created the scrollbar that allows uers to scroll through their trip</li><li>Implemented frontend tests</li><li>Fixed bugs</li><li>Styled Map</li></ul>
+| Pranay Jhaveri      | [PJhaveri02](https://github.com/PJhaveri02)     | <ul><li>Organised GitHub repository</li><li>Created API endpoints</li><li>Created database and schema</li><li>Implemented backend tests</li><li>Created login and sign-up pages</li><li>Created accordian to show users trip</li><li>Fixed bugs</li></ul>  
 
 ## Documentation
 To see our documentation, visit our [Wiki](https://github.com/PJhaveri02/Are-We-There-Yet/wiki)

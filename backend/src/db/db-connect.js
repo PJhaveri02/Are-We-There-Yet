@@ -1,0 +1,17 @@
+import mongoose from "mongoose";
+
+const DEFAULT_CONNECTION_STRING =
+  "mongodb+srv://mainUser:MainUser123@realmcluster.iihe4.mongodb.net/Are-We-There-Yet?retryWrites=true&w=majority";
+
+/**
+ * This function begins the process of connecting to the database, and returns a promise that will
+ * resolve when the connection is established.
+ */
+export default function connectToDatabase(
+  connectionString = DEFAULT_CONNECTION_STRING
+) {
+  return mongoose.connect(connectionString, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+}

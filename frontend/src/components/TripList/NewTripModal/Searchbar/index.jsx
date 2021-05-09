@@ -3,6 +3,11 @@ import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from "use-places-autocomplete";
+import {
+  TextField,
+  List,
+  ListItem,
+} from "@material-ui/core";
 
 function Searchbar(props) {
   const { onDestinationSelect } = props;
@@ -44,21 +49,28 @@ function Searchbar(props) {
       } = suggestion;
 
       return (
-        <li key={place_id} onClick={handleSelect(suggestion)}>
+        <ListItem button key={place_id} onClick={handleSelect(suggestion) }>
           <strong>{main_text}</strong> <small>{secondary_text}</small>
-        </li>
+        </ListItem>
       );
     });
 
   return (
     <div>
-      <input
+      <TextField
+        autoFocus
+        margin="dense"
+        id="search"
+        label="Search Destinations"
+        fullWidth
+        autoComplete="off"
         value={value}
-        onChange={(e) => setValue(e.target.value)}
+        onInput={(e) => setValue(e.target.value)}
         disabled={!ready}
         placeholder="Enter Destination"
       />
-      {status === "OK" && <ul>{renderSuggestions()}</ul>}
+
+      {status === "OK" && <List>{renderSuggestions()}</List>}
     </div>
   );
 }

@@ -1,17 +1,16 @@
 import React from "react";
+import { List, ListItem } from "@material-ui/core";
 
 function DestinationList(props) {
   const { destinations } = props;
   return (
-    <div>
+    <List>
       {destinations && destinations.length > 0 ? (
         destinations.map((destination, index) => (
-          <li key={index}>{destination.locationName}</li>
+          <ListItem key={index}>{index + 1}: {destination.locationName}</ListItem>
         ))
-      ) : (
-        <p>Add a destination using the search bar!</p>
-      )}
-    </div>
+      ) : null}
+    </List>
   );
 }
 

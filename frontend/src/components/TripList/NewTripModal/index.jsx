@@ -2,30 +2,17 @@ import React, { useState, useContext } from "react";
 import Searchbar from "./Searchbar";
 import DestinationList from "./DestinationList";
 import moment from "moment";
-import { makeStyles, Modal, Button, TextField } from "@material-ui/core";
+import { Button, TextField } from "@material-ui/core";
 import { AuthContext } from "../../../App";
 import { createTrip } from "../../../api/crudOperations";
 import { ResourceContext } from "../../../pages/Homepage";
-
-const useStyles = makeStyles((theme) => ({
-  modal: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  paper: {
-    position: "absolute",
-    width: 450,
-    height: 450,
-    backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-  },
-}));
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogTitle from "@material-ui/core/DialogTitle";
 
 function NewTripModal(props) {
   const { open, onCancel } = props;
-  const classes = useStyles();
   const currentDate = moment().format("YYYY-MM-DD");
   const [user] = useContext(AuthContext);
   const { setVersion } = useContext(ResourceContext);
@@ -48,7 +35,7 @@ function NewTripModal(props) {
     ]);
   };
 
-  const handleCloseModal = () => {
+  const handleClose = () => {
     setTitle("");
     setDescription("");
     setSelectedDate(currentDate);
@@ -56,13 +43,17 @@ function NewTripModal(props) {
     onCancel();
   };
 
-  const handleConfirm = () => {
-    if ( destinations.length === 0 ) {
+  const handleConfirm = async () => {
+    if (title.length === 0) {
+      alert("Please enter a title");
+      return;
+    }
+    if (destinations.length === 0) {
       alert("Please enter at least one destination");
       return;
     }
 
-    createTrip(user.id, {
+    await createTrip(user.id, {
       title: title,
       description: description,
       stops: destinations,
@@ -70,66 +61,67 @@ function NewTripModal(props) {
     });
 
     setVersion((prev) => prev + 1);
-    handleCloseModal();
+    console.log("bruhhhhhhh");
+    handleClose();
   };
 
   return (
-    <Modal className={classes.modal} open={open} onClose={handleCloseModal}>
-      <div className={classes.paper}>
-        <div>
-          <label>Title: </label>
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-        </div>
+    <div>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="form-dialog-title"
+      >
+        <DialogTitle id="form-dialog-title">New Trip</DialogTitle>
 
-        <div>
-          <label>Description: </label>
-          <input
-            type="text"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-          />
-        </div>
-
-        <div>
-          <label>Date: </label>
+        <DialogContent>
           <TextField
+            autoFocus
+            margin="dense"
+            id="title"
+            label="Title"
+            type="title"
             fullWidth
+            autoComplete="off"
+            defaultValue={title}
+            onInput={(e) => setTitle(e.target.value)}
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="description"
+            label="Description"
+            type="description"
+            fullWidth
+            autoComplete="off"
+            defaultValue={description}
+            onInput={(e) => setDescription(e.target.value)}
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="date"
             variant="outlined"
+            label="Date"
             type="date"
             defaultValue={currentDate}
             onChange={(e) => setSelectedDate(e.target.value)}
           />
-        </div>
 
-        <div>
-          <DestinationList destinations={destinations} />
-        </div>
-
-        <div>
           <Searchbar onDestinationSelect={onDestinationSelect} />
-        </div>
+          <DestinationList destinations={destinations} />
 
-        <div>
-          <Button color="secondary" variant="contained" onClick={handleConfirm}>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleConfirm} color="primary">
             confirm
           </Button>
-        </div>
-
-        <div>
-          <Button
-            color="default"
-            variant="contained"
-            onClick={handleCloseModal}
-          >
-            cancel
-          </Button>
-        </div>
-      </div>
-    </Modal>
+        </DialogActions>
+      </Dialog>
+    </div>
   );
 }
 

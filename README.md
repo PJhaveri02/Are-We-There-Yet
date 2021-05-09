@@ -16,9 +16,14 @@ Are-We-There-Yet (AWTY) is an itinerary visualisation software that not only all
 5. A login & sign-up page requiring users to provide an email and password.
 
 ## Getting Started
+1. Open up the terminal at the directory location at which you want to download the repository
+2. Run the following command to download the repository: `git clone https://github.com/PJhaveri02/Are-We-There-Yet.git`
+3. Move to the root directory of the project by running the following command: `cd Are-We-There-Yet`
+
 To run this application follow the steps in **Backend** Readme file then the **Frontend** Readme file. The links to the repsective Reamde files are given below:
-1. [Backend Readme](https://github.com/PJhaveri02/Are-We-There-Yet/blob/readme-editing/backend/README.md)
-2. [Frontend Readme](https://github.com/PJhaveri02/Are-We-There-Yet/blob/readme-editing/frontend/README.md)
+
+4. [Backend Readme](https://github.com/PJhaveri02/Are-We-There-Yet/blob/readme-editing/backend/README.md)
+5. [Frontend Readme](https://github.com/PJhaveri02/Are-We-There-Yet/blob/readme-editing/frontend/README.md)
 
 ## Contributions
 The following table lists the tasks each member contributed to this project:

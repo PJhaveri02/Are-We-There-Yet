@@ -5,7 +5,7 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import Typography from '@material-ui/core/Typography';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { deleteTrip } from '../../../api/crudOperations';
 import { ResourceContext } from '../../../pages/Homepage';
 

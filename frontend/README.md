@@ -8,7 +8,7 @@ This project also uses [Google Maps API](https://developers.google.com/maps/gmp-
 
 # Running the Frontend
 1. In your terminal, move to the frontend folder of this project by running the following command: `cd frontend`
-2. Execute `npm ci` or `npm install` to install all the dependencies
+2. Execute `npm ci` or `npm install` to install all the dependencies (Note: If there is an error message, go the the Error in Running Frontend section below).
 3. To run the frontend, enter the following command: `npm start`
 4. If successful, you should see this in your terminal 
 

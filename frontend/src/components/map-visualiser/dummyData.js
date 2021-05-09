@@ -12,6 +12,7 @@ const meadowbank = {
   lat: -36.8707214,
   lng: 174.8224248,
 };
+
 const aucklanduniversity = {
   lat: -36.8523,
   lng: 174.7691,

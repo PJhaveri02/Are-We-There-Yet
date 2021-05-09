@@ -51,6 +51,7 @@ export default function Slider(props) {
       {sliderDistances && (
         <input
           type="range"
+          title="slider"
           min={sliderDistances[0]}
           step={step}
           max={sliderDistances[sliderDistances.length - 1]}

@@ -14,7 +14,7 @@ This project also uses [Google Maps API](https://developers.google.com/maps/gmp-
 
 ![image](https://user-images.githubusercontent.com/55341679/117530782-24abed80-b033-11eb-87f5-1674b2ef6658.png)
 
-4a. You should also be able to see this on your browswer if you are at following URL: `http://localhost:3000`
+4a. You should also be able to see this on your browser if you are at the following URL: `http://localhost:3000`
 
 <img src="https://user-images.githubusercontent.com/55341679/117530909-d6e3b500-b033-11eb-9450-a33fb8f347c9.png" width="500" height="600">
 

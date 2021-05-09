@@ -42,6 +42,7 @@ function TripList() {
       </div>
       {/* {display && <NewTripModal onCancel={handleCancel} />} */}
       <NewTripModal open={display} onCancel={handleCancel} />
+
     </div>
   );
 }

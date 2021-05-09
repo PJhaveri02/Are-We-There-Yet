@@ -5,7 +5,7 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import Typography from '@material-ui/core/Typography';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { deleteTrip } from '../../../api/crudOperations';
 import { ResourceContext } from '../../../pages/Homepage';
 
@@ -49,7 +49,7 @@ export const TripView = ({ trip, userID, setVersion }) => {
         <div className={classes.summary}>
           <Typography className={classes.heading}>{trip.title}</Typography>
           <span style={{ flexGrow: 1 }} />
-          <IconButton aria-label='delete' color='secondary' onClick={() => handleTripDelete()}>
+          <IconButton aria-label='delete' color='primary' onClick={() => handleTripDelete()}>
             <DeleteForeverIcon />
           </IconButton>
         </div>

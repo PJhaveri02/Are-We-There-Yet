@@ -191,5 +191,4 @@ describe('Testing the map', () => {
     expect(mockCallbacks.mockSetOptions.mock.calls.length).toBe(1);
     expect(mockCallbacks.mockSetZoom.mock.calls.length).toBe(1);
   });
-
 })

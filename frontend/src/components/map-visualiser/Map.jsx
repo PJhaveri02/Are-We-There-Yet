@@ -78,6 +78,10 @@ export default function Map(props) {
     }
   }, [directions]);
 
+  useEffect(() => {
+    setNotDSRendered(true);
+  }, [stops]);
+
   // A callback function to be called when the DirectionsService has obtained a response
   const directionsCallback = (response, status) => {
     if (response && status === "OK") {
@@ -93,6 +97,7 @@ export default function Map(props) {
   return (
     <div>
       <GoogleMap
+        id="google-map"
         mapContainerStyle={mapContainerStyle}
         options={DEFAULT_MAP_SETTINGS}
         zoom={defaultZoom}

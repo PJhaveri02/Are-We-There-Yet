@@ -32,6 +32,7 @@ export const TripView = ({ trip, userID, setVersion }) => {
   const handleTripDelete = async () => {
     await deleteTrip(userID, trip._id);
     setVersion((prev) => prev + 1);
+    setTrip(undefined);
   };
 
   const handleClickTrip = () => {

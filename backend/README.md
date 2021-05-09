@@ -20,6 +20,11 @@ If you see an error message similar to the one shown below, then run the command
 # Testing
 Testing is done using the [Jest](https://jestjs.io/) framework combined with an in-memory MongoDB instance ([mongodb-memory-server](https://github.com/nodkz/mongodb-memory-server)).
 
+# Reset Database
+**NOTE:** Resetting the database will impact _ALL_ other users. So, reset the database in seldom and only if you know what you are doing.
+1. If you haven't already, move the current working directory to the backend folder using the following command: `cd backend`
+2. Execute `npm init-db`
+
 ## Running tests
 1. Ensure that a local MongoDB instance is **NOT** running (use `Ctrl` + `C` at the command line to stop)
 2. If you haven't already, move the current working directory to the backend folder using the following command: `cd backend`

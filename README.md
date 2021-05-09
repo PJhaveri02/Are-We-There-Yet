@@ -26,7 +26,7 @@ To run this application follow the steps in **Backend** Readme file then the **F
 5. [Frontend Readme](https://github.com/PJhaveri02/Are-We-There-Yet/blob/readme-editing/frontend/README.md)
 
 ## Contributions
-The following table lists the tasks each member contributed to this project:
+The following table lists the tasks each member completed in this project:
 
 | Name   |    GitHub Username     |    Tasks      |
 | ----------- | ----------- |----------------------

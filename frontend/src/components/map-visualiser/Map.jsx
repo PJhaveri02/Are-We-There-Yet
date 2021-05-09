@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import circle from "../../assets/circle2.png";
+import endFlag from "../../assets/endFlag.png";
+import startFlag from "../../assets/startFlag.png";
+
 import {
   DEFAULT_TRAVEL_MODE,
   defaultZoom,
@@ -75,6 +78,10 @@ export default function Map(props) {
     }
   }, [directions]);
 
+  useEffect(() => {
+    setNotDSRendered(true);
+  }, [stops]);
+
   // A callback function to be called when the DirectionsService has obtained a response
   const directionsCallback = (response, status) => {
     if (response && status === "OK") {
@@ -88,8 +95,9 @@ export default function Map(props) {
   };
 
   return (
-    <div>        
+    <div>
       <GoogleMap
+        id="google-map"
         mapContainerStyle={mapContainerStyle}
         options={DEFAULT_MAP_SETTINGS}
         zoom={defaultZoom}
@@ -127,10 +135,16 @@ export default function Map(props) {
               }}
             />
           ))}
-        {/* {origin ? (
+        {origin ? (
           <Marker
             key={"ORIGIN"}
             position={{ lat: origin.lat, lng: origin.lng }}
+            icon={{
+              url: startFlag,
+              scaledSize: new window.google.maps.Size(50, 50),
+              origin: new window.google.maps.Point(0, 0),
+              anchor: new window.google.maps.Point(15, 50),
+            }}
           />
         ) : null}
 
@@ -138,8 +152,14 @@ export default function Map(props) {
           <Marker
             key={"DESTINATION"}
             position={{ lat: destination.lat, lng: destination.lng }}
+            icon={{
+              url: endFlag,
+              scaledSize: new window.google.maps.Size(50, 50),
+              origin: new window.google.maps.Point(0, 0),
+              anchor: new window.google.maps.Point(15, 50),
+            }}
           />
-        ) : null} */}
+        ) : null}
 
         {sliderPosition && (
           <Marker 

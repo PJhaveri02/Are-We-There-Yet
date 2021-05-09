@@ -44,6 +44,10 @@ function NewTripModal(props) {
   };
 
   const handleConfirm = async () => {
+    if (title.length === 0) {
+      alert("Please enter a title");
+      return;
+    }
     if (destinations.length === 0) {
       alert("Please enter at least one destination");
       return;

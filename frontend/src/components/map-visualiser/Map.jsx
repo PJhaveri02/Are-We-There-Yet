@@ -120,7 +120,7 @@ export default function Map(props) {
           />
         )}
 
-        {path &&
+        {path && stops &&
           path.map((item, index) => (
             <Polyline
               path={item}

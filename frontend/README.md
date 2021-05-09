@@ -10,7 +10,7 @@ This project also uses [Google Maps API](https://developers.google.com/maps/gmp-
 1. In your terminal, move to the frontend folder of this project by running the following command: `cd frontend`
 2. Execute `npm ci` or `npm install` to install all the dependencies
 3. To run the frontend, enter the following command: `npm start`
-4. If successful, you should see this on your terminal 
+4. If successful, you should see this in your terminal 
 
 ![image](https://user-images.githubusercontent.com/55341679/117530782-24abed80-b033-11eb-87f5-1674b2ef6658.png)
 
@@ -31,6 +31,5 @@ If you see an error message similar to the one shown below, then run the command
 Testing is done using the [Jest](https://jestjs.io/) framework.
 
 ## Running tests
-1. Ensure that a local MongoDB instance is **NOT** running (use `Ctrl` + `C` at the command line to stop)
-2. If you haven't already, move the current working directory to the frontend folder using the following command: `cd frontend`
-3. Execute `npm test`
+1. If you haven't already, move the current working directory to the frontend folder using the following command: `cd frontend`
+2. Execute `npm test`

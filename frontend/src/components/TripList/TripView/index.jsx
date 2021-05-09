@@ -49,7 +49,7 @@ export const TripView = ({ trip, userID, setVersion }) => {
         <div className={classes.summary}>
           <Typography className={classes.heading}>{trip.title}</Typography>
           <span style={{ flexGrow: 1 }} />
-          <IconButton aria-label='delete' color='secondary' onClick={() => handleTripDelete()}>
+          <IconButton aria-label='delete' color='primary' onClick={() => handleTripDelete()}>
             <DeleteForeverIcon />
           </IconButton>
         </div>

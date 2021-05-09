@@ -6,9 +6,9 @@ function NewTripButton(props) {
   const {onClick} = props;
 
   return (
-    <Button onClick={() => onClick()} color="secondary" variant="contained">
+    <Button onClick={() => onClick()} color="primary" variant="contained">
       <AddIcon />
-      new journey
+      new trip
     </Button>
   );
 }

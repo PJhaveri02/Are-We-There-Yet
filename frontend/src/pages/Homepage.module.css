@@ -1,12 +1,12 @@
 .Homepage {
   display: flex;
-  background-color: #4000ff;
   height: 100vh;
 }
 
-.TripList {
+.Navbar {
   display: inline-block;
   width: 25%;
+  background-color: #f8f8ff;
 }
 
 .visualizer {

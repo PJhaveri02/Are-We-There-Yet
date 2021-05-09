@@ -6,7 +6,11 @@ function LogoutButton() {
   const [user, setUser] = useContext(AuthContext);
 
   return (
-    <Button
+    <Button style={{
+      width: "100%",
+      position: "relative",
+      bottom: "0",
+    }}
       onClick={async () => {
         const loggedOutUser = await user.logOut();
         setUser(loggedOutUser);
